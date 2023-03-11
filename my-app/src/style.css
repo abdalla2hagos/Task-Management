@@ -1,0 +1,22 @@
+body{
+    height: 100vh;
+}
+.emptyBoard{
+    display: none;
+}
+
+.wrapper:empty + .emptyBoard{
+    display: block;
+}
+
+
+dialog:modal{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 100%;
+  max-width: 70%; */
+  /* position: static; */
+}
+
+
