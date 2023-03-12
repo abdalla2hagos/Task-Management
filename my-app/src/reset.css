@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-/* Remove default margin & Inherit fonts for inputs and buttons etc */
+/* Remove default margin & Inherit fonts for inputs and buttons etc and resets headings too */
 * {
   margin: 0;
   font: inherit;
@@ -24,11 +24,6 @@ ul{
   padding: 0;
 }
 
-/* reset buttons */
-/* button{
-  border: 0;
-  background-color: inherit;
-} */
 
 /* Set scrool behavior */
 html,body{

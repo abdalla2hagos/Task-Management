@@ -5,20 +5,20 @@ function Header(){
         <>
             <header className='header'>
                 <div className='wrapper'>
-                    <div>
+                    <div className='flexHeader'>
                         <img className='logo' src="/logo-mobile.svg" alt="kanban logo" />
-                        <h1 className='primaryHeading visually-hidden'>Kanban</h1>
+                        <h1 className='primaryHeading hiddenLogo'>Kanban</h1>
 
                         {/* p only visible on desktop version cuz it is not a button anymore */}
                         {/* <p>Platform Launch</p> */}
-                        <button className='platformLaunch' aria-expanded='false'>
+                        <button className='boardTitle' aria-expanded='false'>
                             Platform Launch
                             <img className='platformLaunch__arrow' src="/icon-chevron-up.svg" alt="arrow icon" />
                         </button>
                         
                         <button className='newTask'>
                             <img className='Plus--icon' src="/icon-add-task-mobile.svg" alt="plus sign icon" />
-                            Add New Task
+                           <span>Add New Task</span>
                         </button>
 
                         <img className='ellipsisIcon' src="/icon-vertical-ellipsis.svg" alt="vertical ellipsis icon" />
