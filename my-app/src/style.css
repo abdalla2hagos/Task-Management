@@ -6,8 +6,8 @@
     --fw-bold: 700;
 
     --fs-1: 1rem;
-    --fs-1-125: 1.125rem;
     --fs-1-5: 1.5rem;
+    --fs-1-125: 1.125rem;
 
     --clr-purple-1: hsl(242, 48%, 58%);
     --clr-purple-2: hsl(243, 100%, 82%);
@@ -29,6 +29,7 @@
 body{
     height: 100vh;
     background-color: var(--clr-body);
+    font-family: var(--ff);
 }
 .emptyBoard{
     display: none;
@@ -53,9 +54,12 @@ dialog:modal{
   /* position: static; */
 }
 
+/* utility classes start */
+.Plus--icon{
+    margin-inline-end: .2rem
+}
 
-/* header start */
-.hiddenLogo{
+.hidden--item{
     clip: rect(0 0 0 0); 
     clip-path: inset(50%);
     height: 1px;
@@ -64,6 +68,11 @@ dialog:modal{
     white-space: nowrap; 
     width: 1px;
 }
+/* utility classes end */
+
+
+/* header start */
+
 
 .sideBar{
     display: none;
@@ -76,17 +85,53 @@ dialog:modal{
 .flexHeader{
     display: flex;
     align-items: center;
-    /* outline: 1px solid red; */
 }
 
-.ellipsisIcon,
+.ellipsis,
 .logo{
     align-self: center;
 }
 
 .logo{
-    margin-inline-end: 1rem;
+    margin-inline-end: .1rem;
 }
+
+.boardTitle,
+.newTask{
+    display: flex;
+    align-items: center;
+}
+
+.boardTitle{
+    flex-grow: 1;
+    background-color: transparent;
+    border: 0;
+    font-weight: var(--fw-bold);
+    color: var(--clr-black-1);
+    font-size: var(--fs-1);
+}
+
+.boardTitle__arrow{
+    margin-inline-start: .3rem
+}
+
+.newTask{
+    border: 0;
+    border-radius: 1rem;
+    padding: .5rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 0.8rem;
+    background-color: var(--clr-purple-1);
+}
+
+.ellipsis{
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    margin-inline-start: 1.1rem
+}
+/* header end */
+
 
 
 
