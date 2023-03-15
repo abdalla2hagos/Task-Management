@@ -5,7 +5,7 @@ function EditTaskModal(){
     return(
         <>
             {/* <dialog ref={modal}> */}
-            <dialog> 
+            <dialog > 
                 <h3 className='modal--title'>Edit Task</h3>
 
                 {/* <form onSubmit={handlChange}> */}
