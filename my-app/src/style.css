@@ -50,22 +50,29 @@ body{
 
 .wrapper{
     width: 90%;
-    max-width: 1000px;
+    max-width: 62.5rem;
     margin: 0 auto;
 }
 
-dialog:modal{
+dialog{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   /* width: 100%;
-  max-width: 70%; */
-  /* position: static; */
+  max-width: 70%;  */
 }
 
 /* utility classes start */
 .grayText--1{
     color: var(--clr-gray-1);
+}
+
+.grayText--2{
+    color: var(--clr-gray-2);
+}
+
+.grayText--3{
+    color: var(--clr-gray-3);
 }
 
 .blackText--1{
@@ -82,6 +89,10 @@ dialog:modal{
 
 .purpleBackground--2{
     background-color: var(--clr-purple-2);
+}
+
+.grayBackground--3{
+    background-color: var(--clr-gray-3);
 }
 
 .fw--regular{
@@ -140,13 +151,10 @@ dialog:modal{
 
 .header{
     background-color: var(--clr-header);
-    padding-block: 1rem;
+    padding-block: 1em;
     margin-block-end: 1rem
 }
 
-.upperBar{
-    
-}
 .flex__header{
     display: flex;
     align-items: center;
@@ -182,9 +190,9 @@ dialog:modal{
 .newTask{
     border: 0;
     border-radius: 1rem;
-    padding: .5rem;
-    padding-inline-start: 1rem;
-    padding-inline-end: 0.8rem;
+    padding: .5em;
+    padding-inline-start: 1em;
+    padding-inline-end: 0.8em;
 }
 
 .newTask[data-cursor='pointer']{
@@ -202,50 +210,169 @@ dialog:modal{
 /* header end */
 
 /* sideBar start */
-.sideBar{}
 
 .flex__sideBar{
+    --sizing: 1em;
     display: flex;
     flex-direction: column;
     background-color: var(--clr-white);
-    padding: 1rem;
-    border-radius: 1rem;
+    padding: var(--sizing);
+    border-radius: .5rem;
 }
 
 .sideBar__wrapper{
-    width: 300px;
+    width: 16.875rem;
     margin: 0 auto;
 }
 
-.nav__title{
-    margin-block-end: 1rem;
-}
+
 .nav__menu{
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     gap: 1rem;
+    margin-block: 1rem;
 }
 
-.nav__item{
+.nav__link{
     display: flex;
     align-items: center;
-    gap: .5rem;
-}
-.nav__link{
     text-decoration: none;
+    padding-block: 1em;
+    padding-inline-end: 2em;
+    position: relative;
+    isolation: isolate;
+}
+
+.nav__link::before{
+   content: '';
+   display: block;
+   position: absolute;
+   z-index: -1;
+   inset: 0 -2rem 0 calc(var(--sizing) * -1);
+   background-color: var(--clr-purple-2); 
+   border-radius: 0 100rem 100rem 0;
+}
+
+
+.nav__icon{
+    margin-inline-end: .5rem;
 }
 
 .nav__addBoard{
+    cursor: pointer;
     display: flex;
     align-items: center;
     background-color: transparent;
     border: 0;
 }
 
+.nav__Boardicon{
+    margin-inline-end: .5rem;
+
+}
+
 .nav__addBoard .Plus--icon{
     fill: var(--clr-purple-1);
 }
+
+.toggleSidebar{
+    display: none;
+}
+
+.theme{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-gray-3);
+    padding: .7rem;
+    border-radius: .5rem;
+}
+
+.theme__toggle{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 1rem;
+    border: 0;
+    background-color: var(--clr-purple-2);
+    height: 1.18rem;
+    aspect-ratio: 2/1;
+    padding-inline: .2em;
+    margin-inline: 1rem;
+}
+
+.theme__ball{
+    fill: var(--clr-white);
+    /* transform: translateX(100%) */
+}
 /* sideBar end */
+
+/* add new task modal start */
+.dialog{
+    border: 0;
+    border-radius: .5rem;
+    padding: 1em;
+}
+
+.modal--title{
+    margin-block-end: 1rem;
+}
+
+.grid--flow{
+    display: grid;
+}
+
+.grid{
+    display: grid;
+    gap: 1rem;
+    margin-block-end: 1rem;
+}
+
+input[type=text],
+textarea{
+    border: 1px solid var(--clr-gray-1);
+    padding: .5rem .5rem .5rem 1rem;
+}
+
+select,
+input[type=text],
+textarea{
+    border-radius: .4rem;
+}
+
+select{
+    color: black;
+}
+.light--Button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark--Button{
+    color: var(--clr-white);
+}
+.light--Button,
+.dark--Button{
+    border-radius: 100rem;
+    border: 0;
+    padding-block: .3rem;
+}
+
+.flex--items{
+    display: flex;
+}
+
+.removeItemIcon{
+    border: 0;
+    background-color: transparent;
+    max-width: 100%;
+    width: 100%;
+    flex-grow: 1;
+}
+/* add new task modal end */
 
 
 

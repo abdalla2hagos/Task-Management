@@ -1,50 +1,67 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 
 function AddNewTaskModal(){
+
+    const modal = useRef()
+
+    function openModal(){
+        modal.current.showModal()
+    }
+
     return(
         <>
-            {/* <dialog ref={modal}> */}
-            <dialog> 
-                <h3 className='modal--title'>Add New Task</h3>
+            <dialog ref={modal} className='dialog'> 
+                <h3 className='modal--title fw--bold'>Add New Task</h3>
 
-                {/* <form onSubmit={handlChange}> */}
-                <form>
-                    <label>Title</label>
-                    <input type='text' name='addTaskName' placeholder='e.g. Take coffee break'/>
+                <form className='grid'>
 
-                    <label>Description</label>
-                    <textarea name="addTaskDesc" cols="30" rows="5" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
-
-                    <label>Subtasks</label>
-                    <div>
-                        <input type='text' name='addSubtask' placeholder='e.g. Make coffe'/>
-                        <button className='removeItemIcon'>
-                            <img src="/icon-cross.svg" alt="" />
-                        </button>
-                    </div>
-                    <div>
-                        <input type='text' name='addSubtask' placeholder='e.g. Drink coffee & smile'/>
-                        <button className='removeItemIcon'>
-                            <img src="/icon-cross.svg" alt="" />
-                        </button>
+                    <div className='grid--flow'>
+                        <label className='fw--bold grayText--1'>Title</label>
+                        <input className='fs--0-875' type='text' name='addTaskName' placeholder='e.g. Take coffee break'/>
                     </div>
 
-                    <button className='dark--Button'>Create New Task</button>
-                    
-                    <label>Status</label>
-                    <select name="" id="">
-                        <option value="Doing">Doing</option>
-                        <option value="ToDo">ToDo</option>
-                    </select>
+                    <div className='grid--flow'>
+                        <label className='fw--bold grayText--1'>Description</label>
+                        <textarea className='fs--0-875' name="addTaskDesc" cols="30" rows="5" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
+                    </div>
+
+                    <div className='grid--flow'>
+                        <label className='fw--bold grayText--1'>Subtasks</label>
+
+                        <div className=''>
+                            <input className='fs--0-875' type='text' name='addSubtask' placeholder='e.g. Make coffe'/>
+                            <button className='removeItemIcon'>
+                                <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
+                            </button>
+                        </div>
+
+                        <div className=''>
+                            <input className='fs--0-875' type='text' name='addSubtask' placeholder='e.g. Drink coffee & smile'/>
+                            <button className='removeItemIcon'>
+                                <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
+                            </button>
+                        </div>
+
+                        <button className='dark--Button  purpleBackground--1'>Create New Task</button>
+                    </div>
+
+                    <div className='grid--flow'>
+                        <label className='fw--bold grayText--1'>Status</label>
+                        <select name="" id="">
+                            <option value="Doing">Doing</option>
+                            <option value="ToDo">ToDo</option>
+                        </select>
+                    </div>
                 </form>
-                <button className='light--Button'>
-                    <img className='Plus--icon' src="/icon-add-task-mobile.svg" alt="plus sign icon" />
+
+                <button className='light--Button purpleText--1 grayBackground--3 fw--bold'>
+                    <svg className='Plus--icon purpleText--1' width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="var(--clr-purple-1)" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
                     Add New Subtask
                 </button>
             </dialog>
 
-            {/* <button onClick={openModal}>open modal</button> */}
+            <button onClick={openModal}>open modal</button>
         </>
     )
 }
