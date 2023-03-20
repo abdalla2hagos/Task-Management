@@ -40,6 +40,10 @@ body{
     background-color: var(--clr-gray-3);
     font-family: var(--ff);
 }
+
+button{
+    cursor: pointer;
+}
 .emptyBoard{
     display: none;
 }
@@ -180,7 +184,6 @@ dialog{
     flex-grow: 1;
     background-color: transparent;
     border: 0;
-    cursor: pointer;
 }
 
 .boardTitle__arrow{
@@ -200,7 +203,6 @@ dialog{
 }
 
 .ellipsis{
-    cursor: pointer;
     padding: 0;
     border: 0;
     background-color: transparent;
@@ -260,7 +262,6 @@ dialog{
 }
 
 .nav__addBoard{
-    cursor: pointer;
     display: flex;
     align-items: center;
     background-color: transparent;
@@ -292,7 +293,6 @@ dialog{
 .theme__toggle{
     display: flex;
     align-items: center;
-    cursor: pointer;
     border-radius: 1rem;
     border: 0;
     background-color: var(--clr-purple-2);
@@ -308,11 +308,17 @@ dialog{
 }
 /* sideBar end */
 
+dialog::backdrop{
+    background: rgba(0, 0, 0, 0.5 );
+}
+
 /* add new task modal start */
 .dialog{
     border: 0;
     border-radius: .5rem;
     padding: 1em;
+    min-width: 30%;
+    /* max-width: 100%; */
 }
 
 .modal--title{
@@ -327,6 +333,27 @@ dialog{
     display: grid;
     gap: 1rem;
     margin-block-end: 1rem;
+}
+
+.flex--flow{
+    display: flex;
+    gap: .3rem;
+    margin-block-end:.5rem
+}
+
+.addSubtask{
+   flex-grow: 1;
+   width: 100%;
+}
+
+.removeItemIcon{
+    border: 0;
+    background-color: transparent;
+    
+}
+
+.subtaskBtn{
+    width: 100%;
 }
 
 input[type=text],
@@ -345,7 +372,6 @@ select{
     color: black;
 }
 .light--Button{
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -353,25 +379,24 @@ select{
 
 .dark--Button{
     color: var(--clr-white);
+    width: 100%;
 }
+
 .light--Button,
 .dark--Button{
     border-radius: 100rem;
     border: 0;
-    padding-block: .3rem;
+    padding-block: .5em;
 }
 
 .flex--items{
     display: flex;
 }
 
-.removeItemIcon{
-    border: 0;
-    background-color: transparent;
-    max-width: 100%;
-    width: 100%;
-    flex-grow: 1;
-}
+
+
+
+
 /* add new task modal end */
 
 

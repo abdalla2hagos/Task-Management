@@ -14,7 +14,7 @@ function EditTaskModal(){
                     <input type='text' name='editTaskName' placeholder='e.g. Take coffee break'/>
 
                     <label>Description</label>
-                    <textarea name="editTaskDesc" cols="30" rows="5" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
+                    <textarea name="editTaskDesc" cols="30" rows="3" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
 
                     <label>Subtasks</label>
                     <div>
