@@ -3,15 +3,15 @@ import React, {useRef} from 'react'
 
 function AddNewBoardModal(){
 
-        // const modal = useRef()
+        const modal = useRef()
     
-        // function openModal(){
-        //     modal.current.showModal()
-        // }
+        function openModal(){
+            modal.current.showModal()
+        }
     return(
         <>
-            {/* <dialog ref={modal} className='dialog'> 
-                <h3 className='modal--title fw--bold'>Add New Board</h3>
+            <dialog ref={modal} className='dialog'> 
+                <h3 className='modal--title fw--bold fs-1-2'>Add New Board</h3>
 
                 <form className='grid'>
 
@@ -45,11 +45,11 @@ function AddNewBoardModal(){
 
                 </form>
 
-                <button className='dark--Button purpleBackground--1'>Create New Board</button>
+                <button className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
                 
             </dialog>
 
-            <button onClick={openModal}>open modal</button> */}
+            <button onClick={openModal}>open modal</button>
         </>
     )
 }

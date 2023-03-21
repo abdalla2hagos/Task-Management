@@ -3,16 +3,16 @@ import React, {useRef} from 'react'
 
 function AddNewTaskModal(){
 
-    // const modal = useRef()
+    const modal = useRef()
 
-    // function openModal(){
-    //     modal.current.showModal()
-    // }
+    function openModal(){
+        modal.current.showModal()
+    }
 
     return(
         <>
-            {/* <dialog ref={modal} className='dialog'> 
-                <h3 className='modal--title fw--bold'>Add New Task</h3>
+            <dialog ref={modal} className='dialog'> 
+                <h3 className='modal--title fs-1-2 fw--bold'>Add New Task</h3>
 
                 <form className='grid'>
 
@@ -58,10 +58,10 @@ function AddNewTaskModal(){
                     </div>
                 </form>
 
-                <button className='dark--Button  purpleBackground--1'>Create Task</button>
+                <button className='dark--Button whiteText purpleBackground--1'>Create Task</button>
             </dialog>
 
-            <button onClick={openModal}>open modal</button> */}
+            <button onClick={openModal}>open modal</button>
         </>
     )
 }

@@ -16,13 +16,13 @@ function App() {
    <>
     <Header />
     <Main />
-    <EditBoardModal />
-    <AddNewBoardModal />
-    <AddNewTaskModal />
-    <EditTaskModal />
-    <TaskModal />
-    <DeleteBoardModal />
-    <DeleteTaskModal />
+    {/* <EditBoardModal /> */}
+    {/* <AddNewBoardModal /> */}
+    {/* <AddNewTaskModal /> */}
+    {/* <EditTaskModal /> */}
+    {/* <TaskModal /> */}
+    {/* <DeleteBoardModal /> */}
+    {/* <DeleteTaskModal /> */}
    </>
   )
 }

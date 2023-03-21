@@ -9,11 +9,14 @@
     --fs-0-875: .875rem;
     --fs-0-5: .5rem;
     --fs-1: 1rem;
-    --fs-1-5: 1.5rem;
     --fs-1-125: 1.125rem;
+    --fs-1-2: 1.2rem;
+    --fs-1-5: 1.5rem;
 
     --clr-purple-1: hsl(242, 48%, 58%);
     --clr-purple-2: hsl(243, 100%, 82%);
+    --clr-orange-1: hsl(0, 78%, 63%);
+    --clr-orange-2: hsl(0, 100%, 80%);
     --clr-black-1: hsl(237, 100%, 4%);
     --clr-black-2: hsl(235, 16%, 15%);
     --clr-black-3: hsl(235, 12%, 19%);
@@ -22,34 +25,17 @@
     --clr-gray-2: hsl(221, 69%, 94%);
     --clr-gray-3: hsl(220, 69%, 97%);
     --clr-white: hsl(0, 0%, 100%);
-    --clr-orange-1: hsl(0, 78%, 63%);
-    --clr-orange-2: hsl(0, 100%, 80%);
 
-    --clr-body: var(--clr-gray-3);
-    --clr-header: var(--clr-white);
-    --clr-black-text-1: var(--clr-black-1);
-    --clr-gray-text-1: var(--clr-gray-1);
-    --clr-purple-text-1: var(--clr-purple-1);
-    --clr-purple-background-1: var(--clr-purple-1);
-    --clr-orange-text-1: var(--clr-orange-1);
-    --clr-orange-background: var(--clr-orange-1);
 }
 
 body{
-    height: 100vh;
+    min-height: 100vh;
     background-color: var(--clr-gray-3);
     font-family: var(--ff);
 }
 
 button{
     cursor: pointer;
-}
-.emptyBoard{
-    display: none;
-}
-
-.wrapper:empty + .emptyBoard{
-    display: block;
 }
 
 .wrapper{
@@ -62,6 +48,13 @@ dialog{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.dialog{
+    border: 0;
+    border-radius: .5rem;
+    padding: 1.5em;
+    width: 90%;
 }
 
 /* utility classes start */
@@ -89,6 +82,10 @@ dialog{
     color: var(--clr-orange-1)
 }
 
+.whiteText{
+    color: var(--clr-white);
+}
+
 .purpleBackground--1{
     background-color: var(--clr-purple-1);
 }
@@ -107,6 +104,10 @@ dialog{
 
 .orangeBackground--2{
     background-color: var(--clr-orange-2);
+}
+
+.whiteBackground{
+    background-color: var(--clr-white);
 }
 
 .fw--regular{
@@ -137,13 +138,16 @@ dialog{
     font-size: var(--fs-1);
 }
 
+.fs--1-125{
+    font-size: var(--fs-1-125);
+}
+.fs-1-2{
+    font-size: var(--fs-1-2);
+}
 .fs--1-5{
     font-size: var(--fs-1-5);
 }
 
-.fs--1-125{
-    font-size: var(--fs-1-125);
-}
 
 .Plus--icon{
     margin-inline-end: .2rem
@@ -164,7 +168,7 @@ dialog{
 /* header start */
 
 .header{
-    background-color: var(--clr-header);
+    background-color: var(--clr-white);
     padding-block: 1em;
     margin-block-end: 1rem
 }
@@ -240,8 +244,8 @@ dialog{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: 1.2rem;
-    margin-block: 1.2rem;
+    gap: 1.5rem;
+    margin-block: 1.5rem;
 }
 
 .nav__link{
@@ -316,12 +320,6 @@ dialog::backdrop{
 }
 
 /* add new task modal start */
-.dialog{
-    border: 0;
-    border-radius: .5rem;
-    padding: 1em;
-    min-width: 30%;
-}
 
 .modal--title{
     margin-block-end: 1rem;
@@ -340,7 +338,7 @@ dialog::backdrop{
 .flex--flow{
     display: flex;
     gap: .3rem;
-    margin-block-end:.5rem
+    margin-block-end: .5rem;
 }
 
 .text--input{
@@ -357,19 +355,16 @@ dialog::backdrop{
 }
 
 input[type=text],
-textarea{
+textarea,
+select{
     border: 1px solid var(--clr-gray-1);
+    border-radius: .5rem;
     padding: .5rem .5rem .5rem 1rem;
-}
-
-select,
-input[type=text],
-textarea{
-    border-radius: .4rem;
 }
 
 select{
     color: black;
+    background-color: var(--clr-white);
 }
 
 .light--Button{
@@ -379,7 +374,6 @@ select{
 }
 
 .dark--Button{
-    color: var(--clr-white);
     width: 100%;
 }
 
@@ -398,11 +392,8 @@ select{
 
 .flex--delete{
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-}
-
-.deleteBtn{
-    color: white;
 }
 
 .deleteBtn,
@@ -413,6 +404,77 @@ select{
     width: 100%;
 }
 /* delete modal end */
+
+/* tasksModal start */
+input[type=checkbox]{
+    accent-color: var(--clr-purple-1)
+}
+
+.grid--tasks{
+    display: grid;
+    gap: 1rem;
+}
+
+.tasks{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border-radius: .3rem;
+}
+
+.tasks{
+    margin-block-end: .5rem;
+    padding: .5rem;
+   
+}
+
+.tasks:last-child{
+    margin: 0;
+}
+
+.flex--title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex--title h3{
+    width: 80%;
+}
+/* tasksModal end */
+
+/* main start */
+.main{
+    /* position: relative; */
+}
+.emptyBoard__addTask{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100rem;
+    border: 0;
+    padding: .5em 1em;
+}
+
+.emptyBoard{
+    visibility: hidden;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50vh;
+    z-index: -1;
+}
+
+div:empty + .emptyBoard{
+    /* min-height: 100vh; */
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+/* main end */
 
 
 

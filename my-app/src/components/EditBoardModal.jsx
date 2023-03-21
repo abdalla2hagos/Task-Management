@@ -2,20 +2,20 @@ import React, {useState, useRef, useEffect} from 'react'
 
 function EditBoardModal(){
 
-    // const modal = useRef()
+    const modal = useRef()
 
-    // function openModal(){
-    //     modal.current.showModal()
-    // }
+    function openModal(){
+        modal.current.showModal()
+    }
    
 
-    // useEffect(()=>{
-    //     modal.current.addEventListener('cancel', (e)=> e.preventDefault())
-    // },[])
+    useEffect(()=>{
+        modal.current.addEventListener('cancel', (e)=> e.preventDefault())
+    },[])
 
     return(
         <>
-            {/* <dialog ref={modal} className='dialog'> 
+            <dialog ref={modal} className='dialog'> 
                 <h3 className='modal--title fw--bold'>Edit Board</h3>
 
                 <form className='grid'>
@@ -50,10 +50,10 @@ function EditBoardModal(){
                     </div>
                 </form>
 
-                <button className='dark--Button purpleBackground--1'>Save Changes</button>
+                <button className='dark--Button whiteText purpleBackground--1'>Save Changes</button>
             </dialog>
 
-            <button onClick={openModal}>open modal</button> */}
+            <button onClick={openModal}>open modal</button>
         </>
     )
 }

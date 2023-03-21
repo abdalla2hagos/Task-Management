@@ -2,17 +2,17 @@ import React, {useState, useRef} from 'react'
 
 
 function EditTaskModal(){
-    // const modal = useRef()
+    const modal = useRef()
 
-    // function openModal(){
-    //     modal.current.showModal()
-    // }
+    function openModal(){
+        modal.current.showModal()
+    }
 
     
     return(
         <>
-            {/* <dialog className='dialog'> 
-                <h3 className='modal--title fw--bold'>Edit Task</h3>
+            <dialog className='dialog'> 
+                <h3 className='modal--title fw--bold fs-1-2'>Edit Task</h3>
 
                 <form className='grid'>
 
@@ -58,10 +58,10 @@ function EditTaskModal(){
                     </div>
                 </form>
 
-                <button className='dark--Button purpleBackground--1'>Save Changes</button>
+                <button className='dark--Button whiteText purpleBackground--1'>Save Changes</button>
     
             </dialog>
-            <button onClick={openModal}>open modal</button> */}
+            <button onClick={openModal}>open modal</button>
         </>
     )
 }

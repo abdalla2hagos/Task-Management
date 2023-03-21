@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Tasks(){
+function Columns(){
     return(
         <>
             <section>
@@ -17,4 +17,4 @@ function Tasks(){
     )
 }
 
-export default Tasks
+export default Columns
