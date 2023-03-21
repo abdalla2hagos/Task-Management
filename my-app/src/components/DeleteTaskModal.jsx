@@ -2,10 +2,11 @@ import React from 'react'
 
 
 function DeleteTaskModal(){
+
     return(
         <>
              <dialog>
-                <h4>Delete this task?</h4>
+                <h3>Delete this task?</h3>
                 <p className='light--text'>Lorem, ipsum dolor sit amet consectetur 
                 adipisicing elit. Est suscipit reprehenderit amet eveniet hic at nulla incidunt debitis dolorem provident?
                 </p>
@@ -15,6 +16,7 @@ function DeleteTaskModal(){
                     <button className='cancelBtn'>Cancel</button>
                 </div>
             </dialog>
+            {/* <button onClick={openModal}></button> */}
         </>
     )
 }

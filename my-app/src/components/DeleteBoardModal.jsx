@@ -1,19 +1,26 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 function DeleteBoardModal(){
+    const modal = useRef()
+
+    function openModal(){
+        modal.current.showModal()
+    }
     return(
         <>
-            <dialog>
-                <h4>Delete this board?</h4>
-                <p className='light--text'>Lorem, ipsum dolor sit amet consectetur 
+            <dialog ref={modal} className='dialog'>
+                <h3 className='modal--title orangeText--1 fw--bold'>Delete this board?</h3>
+
+                <p className='modal--text grayText--1'>Lorem, ipsum dolor sit amet consectetur 
                 adipisicing elit. Est suscipit reprehenderit amet eveniet hic at nulla incidunt debitis dolorem provident?
                 </p>
 
-                <div>
-                    <button className='deleteBtn'>Delete</button>
-                    <button className='cancelBtn'>Cancel</button>
+                <div className='flex--delete fw--medium'>
+                    <button className='deleteBtn orangeBackground--1'>Delete</button>
+                    <button className='cancelBtn purpleText--1'>Cancel</button>
                 </div>
             </dialog>
+            <button onClick={openModal}>open modal</button>
         </>
     )
 }

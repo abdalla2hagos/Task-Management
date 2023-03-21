@@ -62,8 +62,6 @@ dialog{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* width: 100%;
-  max-width: 70%;  */
 }
 
 /* utility classes start */
@@ -87,6 +85,10 @@ dialog{
     color: var(--clr-purple-1);
 }
 
+.orangeText--1{
+    color: var(--clr-orange-1)
+}
+
 .purpleBackground--1{
     background-color: var(--clr-purple-1);
 }
@@ -97,6 +99,14 @@ dialog{
 
 .grayBackground--3{
     background-color: var(--clr-gray-3);
+}
+
+.orangeBackground--1{
+    background-color: var(--clr-orange-1);
+}
+
+.orangeBackground--2{
+    background-color: var(--clr-orange-2);
 }
 
 .fw--regular{
@@ -173,14 +183,12 @@ dialog{
     margin-inline-end: .7rem;
 }
 
-.boardTitle,
-.newTask{
+.flex--center{
     display: flex;
     align-items: center;
 }
 
 .boardTitle{
-    font-size: var(--fs-1-125);
     flex-grow: 1;
     background-color: transparent;
     border: 0;
@@ -232,26 +240,25 @@ dialog{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: 1rem;
-    margin-block: 1rem;
+    gap: 1.2rem;
+    margin-block: 1.2rem;
 }
 
 .nav__link{
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding-block: 1em;
     padding-inline-end: 2em;
     position: relative;
     isolation: isolate;
 }
 
-.nav__link::before{
+.nav__linkSelected::before{
    content: '';
    display: block;
    position: absolute;
    z-index: -1;
-   inset: 0 -2rem 0 calc(var(--sizing) * -1);
+   inset: -.5rem -2rem -.5rem calc(var(--sizing) * -1);
    background-color: var(--clr-purple-2); 
    border-radius: 0 100rem 100rem 0;
 }
@@ -273,10 +280,6 @@ dialog{
 
 }
 
-.nav__addBoard .Plus--icon{
-    fill: var(--clr-purple-1);
-}
-
 .toggleSidebar{
     display: none;
 }
@@ -295,7 +298,7 @@ dialog{
     align-items: center;
     border-radius: 1rem;
     border: 0;
-    background-color: var(--clr-purple-2);
+    background-color: var(--clr-purple-1);
     height: 1.18rem;
     aspect-ratio: 2/1;
     padding-inline: .2em;
@@ -318,7 +321,6 @@ dialog::backdrop{
     border-radius: .5rem;
     padding: 1em;
     min-width: 30%;
-    /* max-width: 100%; */
 }
 
 .modal--title{
@@ -341,18 +343,16 @@ dialog::backdrop{
     margin-block-end:.5rem
 }
 
-.addSubtask{
-   flex-grow: 1;
-   width: 100%;
+.text--input{
+   width: 93%;
 }
 
 .removeItemIcon{
     border: 0;
     background-color: transparent;
-    
 }
 
-.subtaskBtn{
+.addBtn{
     width: 100%;
 }
 
@@ -371,6 +371,7 @@ textarea{
 select{
     color: black;
 }
+
 .light--Button{
     display: flex;
     align-items: center;
@@ -388,16 +389,30 @@ select{
     border: 0;
     padding-block: .5em;
 }
+/* add new task modal end */
 
-.flex--items{
-    display: flex;
+/* delete modal start */
+.modal--text{
+    margin-block-end: .7rem;
 }
 
+.flex--delete{
+    display: flex;
+    gap: 1rem;
+}
 
+.deleteBtn{
+    color: white;
+}
 
-
-
-/* add new task modal end */
+.deleteBtn,
+.cancelBtn{
+    border-radius: 100rem;
+    border: 0;
+    padding-block: .5em;
+    width: 100%;
+}
+/* delete modal end */
 
 
 
