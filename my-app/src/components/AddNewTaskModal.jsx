@@ -12,7 +12,7 @@ function AddNewTaskModal(){
     return(
         <>
             <dialog ref={modal} className='dialog'> 
-                <h3 className='modal--title fs-1-2 fw--bold'>Add New Task</h3>
+                <h2 className='modal--title fs-1-2 fw--bold'>Add New Task</h2>
 
                 <form className='grid'>
 

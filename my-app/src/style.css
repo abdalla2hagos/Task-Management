@@ -94,6 +94,10 @@ dialog{
     background-color: var(--clr-purple-2);
 }
 
+.grayBackground--2{
+    background-color: var(--clr-gray-2);
+}
+
 .grayBackground--3{
     background-color: var(--clr-gray-3);
 }
@@ -168,9 +172,7 @@ dialog{
 /* header start */
 
 .header{
-    background-color: var(--clr-white);
     padding-block: 1em;
-    margin-block-end: 1rem
 }
 
 .flex__header{
@@ -229,7 +231,6 @@ dialog{
     --sizing: 1em;
     display: flex;
     flex-direction: column;
-    background-color: var(--clr-white);
     padding: var(--sizing);
     border-radius: .5rem;
 }
@@ -292,7 +293,6 @@ dialog{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--clr-gray-3);
     padding: .7rem;
     border-radius: .5rem;
 }
@@ -302,7 +302,6 @@ dialog{
     align-items: center;
     border-radius: 1rem;
     border: 0;
-    background-color: var(--clr-purple-1);
     height: 1.18rem;
     aspect-ratio: 2/1;
     padding-inline: .2em;
@@ -319,7 +318,7 @@ dialog::backdrop{
     background: rgba(0, 0, 0, 0.5 );
 }
 
-/* add new task modal start */
+/* modal start */
 
 .modal--title{
     margin-block-end: 1rem;
@@ -383,7 +382,7 @@ select{
     border: 0;
     padding-block: .5em;
 }
-/* add new task modal end */
+/* modal end */
 
 /* delete modal start */
 .modal--text{
@@ -445,7 +444,8 @@ input[type=checkbox]{
 
 /* main start */
 .main{
-    /* position: relative; */
+    margin: 1rem 0 1.5rem 0;
+    padding-block-end: 1.5rem;
 }
 .emptyBoard__addTask{
     display: flex;
@@ -461,12 +461,13 @@ input[type=checkbox]{
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
-    top: 50vh;
+    top: 50%;
     z-index: -1;
+    width: 80%;
+    text-align: center;
 }
 
 div:empty + .emptyBoard{
-    /* min-height: 100vh; */
     visibility: visible;
     display: flex;
     flex-direction: column;
@@ -475,6 +476,34 @@ div:empty + .emptyBoard{
     gap: 1rem;
 }
 /* main end */
+
+/* columns start */
+.columnTitle{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-block-end: 1rem;
+}
+
+.columnTaskTitle{
+    width: max-content;
+    padding: 1em;
+    border-radius: .5rem;
+    margin-block-end: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.columnTaskTitle p:first-child{
+    margin-block-end: .5rem;
+}
+
+.flex--columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3rem;
+}
+
+/* columns end */
 
 
 

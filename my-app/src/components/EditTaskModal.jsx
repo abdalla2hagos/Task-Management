@@ -11,8 +11,8 @@ function EditTaskModal(){
     
     return(
         <>
-            <dialog className='dialog'> 
-                <h3 className='modal--title fw--bold fs-1-2'>Edit Task</h3>
+            <dialog ref={modal} className='dialog'> 
+                <h2 className='modal--title fw--bold fs-1-2'>Edit Task</h2>
 
                 <form className='grid'>
 

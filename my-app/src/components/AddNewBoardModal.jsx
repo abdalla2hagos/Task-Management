@@ -11,7 +11,7 @@ function AddNewBoardModal(){
     return(
         <>
             <dialog ref={modal} className='dialog'> 
-                <h3 className='modal--title fw--bold fs-1-2'>Add New Board</h3>
+                <h2 className='modal--title fw--bold fs-1-2'>Add New Board</h2>
 
                 <form className='grid'>
 

@@ -6,11 +6,11 @@ function Main(){
         <>
             <main className='main'>
                 <div className='wrapper '> 
-                    
-                    <div></div>
-                   {/* <Columns />
-                   <Columns /> */}
-                    
+                    <div className='flex--columns'>
+                        <Columns />
+                        <Columns />
+                   </div>
+
                     <div className='emptyBoard'>
                         <p className='emptyBoard__title grayText--1 fw--bold'>This board is empty. Create a new column to get started.</p>
                         <button className='emptyBoard__addTask whiteText purpleBackground--1'>

@@ -12,7 +12,7 @@ function DeleteTaskModal(){
     return(
         <>
              <dialog ref={modal} className='dialog' >
-                <h3 className='modal--title orangeText--1 fs-1-2 fw--bold'>Delete this task?</h3>
+                <h2 className='modal--title orangeText--1 fs-1-2 fw--bold'>Delete this task?</h2>
 
                 <p className='modal--text grayText--1'>Lorem, ipsum dolor sit amet consectetur 
                 adipisicing elit. Est suscipit reprehenderit amet eveniet hic at nulla incidunt debitis dolorem provident?
