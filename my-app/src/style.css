@@ -4,6 +4,7 @@
     --fw-regular: 400;
     --fw-medium: 500;
     --fw-bold: 700;
+    --fw-extraBold: 800;
 
     --fs-0-813: .813rem; 
     --fs-0-875: .875rem;
@@ -12,6 +13,7 @@
     --fs-1-125: 1.125rem;
     --fs-1-2: 1.2rem;
     --fs-1-5: 1.5rem;
+    --fs-1-7: 1.7rem;
 
     --clr-purple-1: hsl(242, 48%, 58%);
     --clr-purple-2: hsl(243, 100%, 82%);
@@ -40,7 +42,7 @@ button{
 
 .wrapper{
     width: 90%;
-    max-width: 62.5rem;
+    max-width: 69rem;
     margin: 0 auto;
 }
 
@@ -126,6 +128,10 @@ dialog{
     font-weight: var(--fw-bold);
 }
 
+.fw--extraBold{
+    font-weight: var(--fw-extraBold);
+}
+
 .fs--0-813{
     font-size: var(--fs-0-813);
 }
@@ -152,6 +158,10 @@ dialog{
     font-size: var(--fs-1-5);
 }
 
+.fs--1-7{
+    font-size: var(--fs-1-7);
+}
+
 
 .Plus--icon{
     margin-inline-end: .2rem
@@ -170,7 +180,6 @@ dialog{
 
 
 /* header start */
-
 .header{
     padding-block: 1em;
 }
@@ -189,24 +198,39 @@ dialog{
     margin-inline-end: .7rem;
 }
 
+.logoDesk{
+    display: none;
+}
+
 .flex--center{
     display: flex;
     align-items: center;
 }
 
 .boardTitle{
-    flex-grow: 1;
     background-color: transparent;
     border: 0;
+}
+
+.boardTitleDesk{
+    display: none;
+}
+
+.flex--grow{
+    flex-grow: 1;
 }
 
 .boardTitle__arrow{
     margin-inline-start: .3rem
 }
 
+.addNewTask{
+    display: none;
+}
+
 .newTask{
     border: 0;
-    border-radius: 1rem;
+    border-radius: 100rem;
     padding: .5em;
     padding-inline-start: 1em;
     padding-inline-end: 0.8em;
@@ -217,12 +241,30 @@ dialog{
 }
 
 .ellipsis{
+    position: relative;
     padding: 0;
     border: 0;
     background-color: transparent;
     margin-inline-start: .7rem
 }
 
+.edit{
+    display: flex;
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    right: -.1rem;
+    top: 2rem;
+    border-radius: .5rem;
+    padding: 1rem 4rem 1rem .6rem;
+}
+
+.edit button{
+    border: 0;
+    background-color: transparent;
+    width: max-content;
+}
 /* header end */
 
 /* sideBar start */
@@ -486,7 +528,8 @@ div:empty + .emptyBoard{
 }
 
 .columnTaskTitle{
-    width: max-content;
+    max-width: 35rem;
+    /* width: 50rem; */
     padding: 1em;
     border-radius: .5rem;
     margin-block-end: 1rem;
@@ -498,12 +541,47 @@ div:empty + .emptyBoard{
 }
 
 .flex--columns{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 /* columns end */
+
+@media(min-width: 900px){
+   .boardTitle{
+    display: none;
+   }
+
+   .boardTitleDesk,
+   .addNewTask{
+    display: block;
+   }
+
+   .hidden--item{
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    overflow: visible;
+    position: static;
+    white-space: normal;
+    width: auto;
+   }
+
+   .primaryHeading{
+    position: relative;
+    padding-inline-end: 1rem;
+    margin-inline-end: .7rem;
+   }
+
+   .primaryHeading::after{
+    content: '';
+    display: block;
+    position: absolute;
+    inset: -1rem 0;
+    border-right: 2px solid var(--clr-gray-2);
+   }
+}
 
 
 
