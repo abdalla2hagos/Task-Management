@@ -231,9 +231,7 @@ dialog{
 .newTask{
     border: 0;
     border-radius: 100rem;
-    padding: .5em;
-    padding-inline-start: 1em;
-    padding-inline-end: 0.8em;
+    padding: .5em .8em .5em 1em;
 }
 
 .newTask[data-cursor='pointer']{
@@ -271,6 +269,7 @@ dialog{
 
 .flex__sideBar{
     --sizing: 1em;
+
     display: flex;
     flex-direction: column;
     padding: var(--sizing);
@@ -306,7 +305,7 @@ dialog{
    position: absolute;
    z-index: -1;
    inset: -.5rem -2rem -.5rem calc(var(--sizing) * -1);
-   background-color: var(--clr-purple-2); 
+   background-color: var(--clr-purple-1); 
    border-radius: 0 100rem 100rem 0;
 }
 
@@ -325,10 +324,6 @@ dialog{
 .nav__Boardicon{
     margin-inline-end: .5rem;
 
-}
-
-.toggleSidebar{
-    display: none;
 }
 
 .theme{
@@ -353,6 +348,14 @@ dialog{
 .theme__ball{
     fill: var(--clr-white);
     /* transform: translateX(100%) */
+}
+
+.hideSidebar{
+    display: none;
+}
+
+.showSidebar{
+    display: none;
 }
 /* sideBar end */
 
@@ -542,6 +545,7 @@ div:empty + .emptyBoard{
 
 .flex--columns{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
 }
@@ -549,6 +553,7 @@ div:empty + .emptyBoard{
 /* columns end */
 
 @media(min-width: 900px){
+    /*header start */
    .boardTitle{
     display: none;
    }
@@ -581,6 +586,57 @@ div:empty + .emptyBoard{
     inset: -1rem 0;
     border-right: 2px solid var(--clr-gray-2);
    }
+   /* first header end */
+   /* side bar start */
+   .sideBar__wrapper{
+    margin: 0;
+   }
+
+   .sideBar{
+    position: absolute;
+    top: 0;
+    /* transform: translateX(-100%); */
+   }
+
+   .flex__sideBar{
+    height: 100vh;
+    border-radius: 0;
+   }
+   
+   .nav{
+    flex-grow: 1;
+   }
+
+   .logoDesk{
+    display: block;
+   }
+
+   .flex--logo{
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    margin-block-end: 2.5rem;
+   }
+
+   .theme{
+   margin-block-end: 1.2rem;
+   }
+
+   .hideSidebar{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border: 0;
+    background-color: transparent;
+    }
+
+    .showSidebar{
+        position: absolute;
+        display: block;
+        border: 0;
+    }
+   /* side bar end */
 }
 
 
