@@ -351,6 +351,9 @@ dialog{
 }
 
 .hideSidebar{
+    /* display: none; */
+}
+.hideSidebar__icon{
     display: none;
 }
 
@@ -623,17 +626,20 @@ div:empty + .emptyBoard{
    }
 
    .hideSidebar{
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
     border: 0;
     background-color: transparent;
     }
 
-    .showSidebar{
-        position: absolute;
+    [aria-expanded='true'] .hideSidebar__icon{
+    position: relative;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    }
+
+    [aria-expanded='false'] .showSidebar{
         display: block;
+        position: absolute;
         border: 0;
     }
    /* side bar end */
