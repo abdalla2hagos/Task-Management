@@ -347,11 +347,11 @@ dialog{
 
 .theme__ball{
     fill: var(--clr-white);
-    /* transform: translateX(100%) */
+    /* transform: translateX(100%); */
 }
 
 .hideSidebar{
-    /* display: none; */
+    display: none;
 }
 .hideSidebar__icon{
     display: none;
@@ -626,12 +626,15 @@ div:empty + .emptyBoard{
    }
 
    .hideSidebar{
+    display: block;
+    position: relative;
     border: 0;
     background-color: transparent;
-    }
+    padding-block-end: 1rem;
+    padding-block-end: 1rem;
+   }
 
-    [aria-expanded='true'] .hideSidebar__icon{
-    position: relative;
+    [aria-expanded='ture'] .hideSidebar__icon{
     display: flex;
     gap: .5rem;
     align-items: center;
@@ -639,10 +642,21 @@ div:empty + .emptyBoard{
 
     [aria-expanded='false'] .showSidebar{
         display: block;
+        border-radius:0 100rem 100rem 0 ;
         position: absolute;
-        border: 0;
+        padding: 1rem;
+        transform: translate(16rem, -2rem);
+    }
+
+    [aria-expanded='false'] .showSidebar:focus{
+        outline: 5px solid red;
     }
    /* side bar end */
+   /* delete modal start */
+   .flex--delete{
+    flex-direction: row;
+   }
+   /* delete modal end */
 }
 
 
