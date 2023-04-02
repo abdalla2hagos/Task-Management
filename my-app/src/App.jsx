@@ -21,7 +21,7 @@ function App() {
     {/* <AddNewTaskModal /> */}
     {/* <EditTaskModal /> */}
     {/* <TaskModal /> */}
-    <DeleteBoardModal />
+    {/* <DeleteBoardModal /> */}
     {/* <DeleteTaskModal /> */}
    </>
   )
