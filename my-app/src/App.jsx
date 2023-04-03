@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 import Header from './components/Header'
 import Main from './components/Main'
 import EditBoardModal from './components/EditBoardModal'
@@ -11,13 +11,22 @@ import DeleteTaskModal from './components/DeleteTaskModal'
 
 
 function App() {
+  // const [addColumnBeforeTask, setAddColumnBeforeTask] = useState()
+  // when add task is clicked it wont work unless board is added
+  const section = useRef()
+
+  function checkColumn(){
+    section.current
+  }
+  console.log(checkColumn)
+
 
   return (
    <>
     <Header />
-    <Main />
+    <Main ref={section}/>
     {/* <EditBoardModal /> */}
-    {/* <AddNewBoardModal /> */}
+    <AddNewBoardModal />
     {/* <AddNewTaskModal /> */}
     {/* <EditTaskModal /> */}
     {/* <TaskModal /> */}

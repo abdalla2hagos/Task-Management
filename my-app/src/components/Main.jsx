@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import Columns from './Columns'
 
 function Main(){
@@ -7,8 +7,8 @@ function Main(){
             <main className='main'>
                 <div className='wrapper '> 
                     <div className='flex--columns'>
-                        <Columns />
-                        <Columns />
+                        {/* <Columns />
+                        <Columns /> */}
                    </div>
 
                     <div className='emptyBoard'>

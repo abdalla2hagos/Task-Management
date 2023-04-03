@@ -248,7 +248,7 @@ dialog{
 
 .edit{
     display: flex;
-    display: none;
+    /* display: none; */
     flex-direction: column;
     gap: 1rem;
     position: absolute;
@@ -266,8 +266,13 @@ dialog{
 /* header end */
 
 /* sideBar start */
+.sidebar{
+    position: absolute;
+    left: 2.5rem;
+    /* transform: translateX(50%) */
+}
 
-.flex__sideBar{
+.flex__sidebar{
     --sizing: 1em;
 
     display: flex;
@@ -276,7 +281,7 @@ dialog{
     border-radius: .5rem;
 }
 
-.sideBar__wrapper{
+.sidebar__wrapper{
     width: 16.875rem;
     margin: 0 auto;
 }
@@ -339,7 +344,7 @@ dialog{
     align-items: center;
     border-radius: 1rem;
     border: 0;
-    height: 1.18rem;
+    height: 1.20rem;
     aspect-ratio: 2/1;
     padding-inline: .2em;
     margin-inline: 1rem;
@@ -534,6 +539,9 @@ div:empty + .emptyBoard{
 }
 
 .columnTaskTitle{
+    display: block;
+    text-align: left;
+    border: 0;
     max-width: 35rem;
     /* width: 50rem; */
     padding: 1em;
@@ -548,7 +556,6 @@ div:empty + .emptyBoard{
 
 .flex--columns{
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
 }
@@ -556,15 +563,10 @@ div:empty + .emptyBoard{
 /* columns end */
 
 @media(min-width: 900px){
-    /*header start */
-    .grayFilm::before{
-    content: '';
-    display: block;
-    position: absolute;
-    inset: 0;
-    background-color: rgba(160, 160, 160, 0.8);
-    
+    .dialog{
+        width: 50%;
     }
+    /*header start */
 
    .boardTitle{
     display: none;
@@ -600,16 +602,17 @@ div:empty + .emptyBoard{
    }
    /* first header end */
    /* side bar start */
-   .sideBar__wrapper{
+   .sidebar__wrapper{
     margin: 0;
    }
 
-   .sideBar{
-    position: absolute;
+   .sidebar{
+    position: fixed;
     top: 0;
+    left: auto;
    }
 
-   .flex__sideBar{
+   .flex__sidebar{
     height: 100vh;
     border-radius: 0;
    }
@@ -659,7 +662,7 @@ div:empty + .emptyBoard{
         transform: translate(16rem, -3rem);
     }
 
-    .sideBar,
+    .sidebar,
     .boardTitleDesk{
         transition: transform 150ms ease-in-out;
     }
