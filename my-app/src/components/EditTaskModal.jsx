@@ -11,8 +11,8 @@ function EditTaskModal(){
     
     return(
         <>
-            <dialog ref={modal} className='dialog'> 
-                <h2 className='modal--title fw--bold fs-1-2'>Edit Task</h2>
+            <dialog ref={modal} className='dialog' aria-labelledby='modal_title4' id='dialog_editTask'> 
+                <h2 className='modal--title fw--bold fs-1-2' id='modal_title4'>Edit Task</h2>
 
                 <form className='grid'>
 

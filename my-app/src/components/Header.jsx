@@ -1,27 +1,32 @@
 import React, {useState, useEffect} from 'react'
 
 function Header(){
-    const [expansion, setExpansion] = useState(false)
+    const [sidebarExpansion, setSidebarExpansion] = useState(false)
+    const [ellipsisExpansion, setEllipsisExpansion] = useState(false)
 
     const sidebar = {
-        transform: expansion ? 'translateX(0)' : 'translateX(-100%)'
+        transform: sidebarExpansion ? 'translateX(0)' : 'translateX(-100%)'
+    }
+
+    const ellipsis = {
+        display: ellipsisExpansion ? 'flex' : 'none'
     }
 
     function toggleSidebar(){
-        setExpansion(pervExpansion => !pervExpansion)
+        setSidebarExpansion(pervExpansion => !pervExpansion)
     }
-    // if it is not the sidebar than close side bar
+
+    function toggleEllipsis(){
+        setEllipsisExpansion(pervExpansion => !pervExpansion)
+    }
 
     useEffect(()=>{
-        // to show sidebar menu on mobile
-        window.addEventListener('resize', (e)=> {
-            if(window.innerWidth < 900){
-               setExpansion(true)
-            }
-        })
-        // close sidebar
+        // close sidebar and ellipsis when clicking away
         document.addEventListener('click', e => {
-            if(!e.target.closest('.sidebar')) setExpansion(false)
+            if(!e.target.closest('.sidebar, .boardTitle, .ellipsis')) {
+                setSidebarExpansion(false)
+                setEllipsisExpansion(false)
+            }
         })
     }, [])
 
@@ -38,26 +43,28 @@ function Header(){
                         <p className='boardTitleDesk fw--bold blackText--1 fs--1-125'>Platform Launch</p> 
                         
                         <div className='flex--grow'> 
-                            <button className='boardTitle fw--bold blackText--1 fs--1-125 flex--center' aria-expanded='false'>
+                            <button onClick={toggleSidebar} className='boardTitle fw--bold blackText--1 fs--1-125 flex--center' aria-expanded={`${sidebarExpansion}`} aria-controls='menu1'>
                                 Platform Launch
                                 <svg  className='boardTitle__arrow' width="10" height="7" xmlns="http://www.w3.org/2000/svg"><path stroke="#635FC7" stroke-width="2" fill="none" d="M9 6 5 2 1 6"/></svg>
                             </button>
                         </div> 
 
-                        <button className='newTask flex--center purpleBackground--1 fw--medium' data-cursor='pointer'>
+                        <button className='newTask flex--center purpleBackground--1 fw--medium' aria-controls='dialog_addNewTask'>
                             <svg className='Plus--icon' width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="#FFF" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
                             <span className='addNewTask whiteText'>Add New Task</span>
                         </button>
                         
-                        <button className='ellipsis'>
-                            <svg className='ellipsis__Icon' width="5" height="20" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><circle cx="2.308" cy="2.308" r="2.308"/><circle cx="2.308" cy="10" r="2.308"/><circle cx="2.308" cy="17.692" r="2.308"/></g></svg>
-                            
-                            <div className='edit whiteBackground'>
-                                <button className='grayText--1'>Add New Board</button>
-                                <button className='grayText--1'>Edit Board</button>
-                                <button className='orangeText--1'>Delete Board</button>
+                        <div className='relative'>
+                            <button onClick={toggleEllipsis} className='ellipsis' aria-expanded={`${ellipsisExpansion}`} aria-controls='menu2'>
+                                <svg className='ellipsis__Icon' width="5" height="20" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><circle cx="2.308" cy="2.308" r="2.308"/><circle cx="2.308" cy="10" r="2.308"/><circle cx="2.308" cy="17.692" r="2.308"/></g></svg>
+                            </button>
+
+                            <div style={ellipsis} className='edit whiteBackground' id='menu2'>
+                                <button className='grayText--1' aria-controls='dialog_editBoard'>Edit Board</button>
+                                <button className='orangeText--1' aria-controls='dialog_deleteBoard'>Delete Board</button>
                             </div>
-                        </button>
+                        </div>
+
 
                     </div>  
                 </div>
@@ -71,7 +78,7 @@ function Header(){
                             <p className='hidden--item fw--extraBold fs--1-7 blackText--1'>Kanban</p>
                         </div>
                         
-                        <nav className='nav'>
+                        <nav className='nav' id='menu1'>
                             <p className='nav__title fs--1 fw--medium' >ALL BOARDS ( 3 )</p>
 
                             <ul className='nav__menu grayText--1 fw--bold'>
@@ -107,13 +114,13 @@ function Header(){
                             <svg className='theme__dark' width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M6.474.682c.434-.11.718.406.481.78A6.067 6.067 0 0 0 6.01 4.72c0 3.418 2.827 6.187 6.314 6.187.89.002 1.77-.182 2.584-.54.408-.18.894.165.724.57-1.16 2.775-3.944 4.73-7.194 4.73-4.292 0-7.771-3.41-7.771-7.615 0-3.541 2.466-6.518 5.807-7.37Zm8.433.07c.442-.294.969.232.674.674l-.525.787a1.943 1.943 0 0 0 0 2.157l.525.788c.295.441-.232.968-.674.673l-.787-.525a1.943 1.943 0 0 0-2.157 0l-.786.525c-.442.295-.97-.232-.675-.673l.525-.788a1.943 1.943 0 0 0 0-2.157l-.525-.787c-.295-.442.232-.968.674-.673l.787.525a1.943 1.943 0 0 0 2.157 0Z" fill="#828FA3"/></svg>
                         </div>
                         
-                        <button onClick={toggleSidebar} className='toggleSidebar grayText--1 fw--medium' aria-expanded={`${expansion}`}>
+                        <button onClick={toggleSidebar} className='toggleSidebar grayText--1 fw--medium' aria-expanded={`${sidebarExpansion}`}>
                             <span className='hideSidebar'>
                                 <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M8.522 11.223a4.252 4.252 0 0 1-3.654-5.22l3.654 5.22ZM9 12.25A8.685 8.685 0 0 1 1.5 8a8.612 8.612 0 0 1 2.76-2.864l-.86-1.23A10.112 10.112 0 0 0 .208 7.238a1.5 1.5 0 0 0 0 1.524A10.187 10.187 0 0 0 9 13.75c.414 0 .828-.025 1.239-.074l-1-1.43A8.88 8.88 0 0 1 9 12.25Zm8.792-3.488a10.14 10.14 0 0 1-4.486 4.046l1.504 2.148a.375.375 0 0 1-.092.523l-.648.453a.375.375 0 0 1-.523-.092L3.19 1.044A.375.375 0 0 1 3.282.52L3.93.068a.375.375 0 0 1 .523.092l1.735 2.479A10.308 10.308 0 0 1 9 2.25c3.746 0 7.031 2 8.792 4.988a1.5 1.5 0 0 1 0 1.524ZM16.5 8a8.674 8.674 0 0 0-6.755-4.219A1.75 1.75 0 1 0 12.75 5v-.001a4.25 4.25 0 0 1-1.154 5.366l.834 1.192A8.641 8.641 0 0 0 16.5 8Z" fill="#828FA3"/></svg>
                                 Hide Sidebar
                             </span>
                             
-                            <span title='show sidebar' tabindex='1' className='showSidebar purpleBackground--1'>
+                            <span title='show sidebar' tabIndex='1' className='showSidebar purpleBackground--1'>
                                 <svg className='showSidebar__icon purpleBackground--1' width="16" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M15.815 4.434A9.055 9.055 0 0 0 8 0 9.055 9.055 0 0 0 .185 4.434a1.333 1.333 0 0 0 0 1.354A9.055 9.055 0 0 0 8 10.222c3.33 0 6.25-1.777 7.815-4.434a1.333 1.333 0 0 0 0-1.354ZM8 8.89A3.776 3.776 0 0 1 4.222 5.11 3.776 3.776 0 0 1 8 1.333a3.776 3.776 0 0 1 3.778 3.778A3.776 3.776 0 0 1 8 8.89Zm2.889-3.778a2.889 2.889 0 1 1-5.438-1.36 1.19 1.19 0 1 0 1.19-1.189H6.64a2.889 2.889 0 0 1 4.25 2.549Z" fill="#FFF"/></svg>
                             </span>
                         </button>

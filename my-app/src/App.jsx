@@ -11,27 +11,17 @@ import DeleteTaskModal from './components/DeleteTaskModal'
 
 
 function App() {
-  // const [addColumnBeforeTask, setAddColumnBeforeTask] = useState()
-  // when add task is clicked it wont work unless board is added
-  const section = useRef()
-
-  function checkColumn(){
-    section.current
-  }
-  console.log(checkColumn)
-
-
   return (
    <>
-    <Header />
-    <Main ref={section}/>
     {/* <EditBoardModal /> */}
-    <AddNewBoardModal />
-    {/* <AddNewTaskModal /> */}
+    {/* <AddNewBoardModal /> */}
+    <AddNewTaskModal />
     {/* <EditTaskModal /> */}
     {/* <TaskModal /> */}
     {/* <DeleteBoardModal /> */}
     {/* <DeleteTaskModal /> */}
+    <Header />
+    <Main />
    </>
   )
 }
