@@ -1,10 +1,26 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 
 
 function AddNewTaskModal(){
+    const [formData, setFormData] = useState({
+        addTaskTitle: '',
+        addTaskDesc: '',
+        addSubtask1:'',
+        addSubtask2: '',
+        status: ''
+    })
 
+    console.log(formData.status)
+    function handleForm(e){
+        setFormData(prevForm => {
+            return{
+                ...prevForm,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+    
     const modal = useRef()
-
     function openModal(){
         modal.current.showModal()
     }
@@ -18,26 +34,26 @@ function AddNewTaskModal(){
 
                     <div className='grid--flow'>
                         <label className='fw--bold grayText--1'>Title</label>
-                        <input className='fs--0-875' type='text' name='addTaskName' placeholder='e.g. Take coffee break'/>
+                        <input className='fs--0-875' type='text' name='addTaskTitle' value={formData.addTaskTitle} onChange={handleForm} placeholder='e.g. Take coffee break'/>
                     </div>
 
                     <div className='grid--flow'>
                         <label className='fw--bold grayText--1'>Description</label>
-                        <textarea className='fs--0-875' name="addTaskDesc" cols="30" rows="3" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
+                        <textarea className='fs--0-875' name="addTaskDesc" value={formData.addTaskDesc} onChange={handleForm} cols="30" rows="3" placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'/>
                     </div>
 
                     <div>
                         <label className='fw--bold grayText--1'>Subtasks</label>
 
                         <div className='flex--flow'>
-                            <input className='fs--0-875 text--input' type='text' name='addSubtask' placeholder='e.g. Make coffe'/>
+                            <input className='fs--0-875 text--input' type='text' name='addSubtask1' value={formData.addSubtask1} onChange={handleForm} placeholder='e.g. Make coffe'/>
                             <button className='removeItemIcon'>
                                 <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                             </button>
                         </div>
 
                         <div className='flex--flow'>
-                            <input className='fs--0-875 text--input' type='text' name='addSubtask' placeholder='e.g. Drink coffee & smile'/>
+                            <input className='fs--0-875 text--input' type='text' name='addSubtask2' value={formData.addSubtask2} placeholder='e.g. Drink coffee & smile'/>
                             <button className='removeItemIcon'>
                                 <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                             </button>
@@ -51,7 +67,7 @@ function AddNewTaskModal(){
 
                     <div className='grid--flow'>
                         <label className='fw--bold grayText--1'>Status</label>
-                        <select name="" id="">
+                        <select name="status" id="" value={formData.status} onChange={handleForm}>
                             <option value="Doing">Doing</option>
                             <option value="ToDo">ToDo</option>
                         </select>

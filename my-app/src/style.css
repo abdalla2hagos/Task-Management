@@ -270,6 +270,11 @@ dialog{
 /* header end */
 
 /* sideBar start */
+.sidebar{
+    position: absolute;
+    left: 3rem;
+   }
+
 .flex__sidebar{
     --sizing: 1em;
 
@@ -311,7 +316,6 @@ dialog{
    background-color: var(--clr-purple-1); 
    border-radius: 0 100rem 100rem 0;
 }
-
 
 .nav__icon{
     margin-inline-end: .5rem;

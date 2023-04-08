@@ -16,7 +16,7 @@ function EditBoardModal(){
     return(
         <>
             <dialog ref={modal} className='dialog' aria-labelledby='modal_title2' id='dialog_editBoard'> 
-                <h2 className='modal--title fw--bold' id='modal_title2'>Edit Board</h2>
+                <h2 className='modal--title fw--bold fs-1-2' id='modal_title2'>Edit Board</h2>
 
                 <form className='grid'>
 

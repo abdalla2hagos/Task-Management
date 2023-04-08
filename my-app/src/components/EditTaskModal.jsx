@@ -18,7 +18,7 @@ function EditTaskModal(){
 
                     <div className='grid--flow'>
                         <label className='fw--bold grayText--1'>Title</label>
-                        <input className='fs--0-875' type='text' name='editTaskName' placeholder='e.g. Take coffee break'/>
+                        <input className='fs--0-875' type='text' name='editTaskTitle' placeholder='e.g. Take coffee break'/>
                     </div>
 
                     <div className='grid--flow'>
