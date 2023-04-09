@@ -1,23 +1,38 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 
 
 function AddNewTaskModal(){
-    const [formData, setFormData] = useState({
-        addTaskTitle: '',
-        addTaskDesc: '',
-        addSubtask1:'',
-        addSubtask2: '',
-        status: ''
-    })
+    const [formData, setFormData] = useState(form())
 
-    console.log(formData.status)
+    useEffect(()=>{
+        localStorage.setItem('item', JSON.stringify(formData))
+    }, [formData])
+
+    function form(){
+        const storedFormValues = localStorage.getItem('item')
+        if(!storedFormValues)return{
+            addTaskTitle: '',
+            addTaskDesc: '',
+            addSubtask1:'',
+            addSubtask2: '',
+            status: ''
+        }
+        return JSON.parse(storedFormValues)
+    }
+
     function handleForm(e){
+        const {name, value} = e.target
         setFormData(prevForm => {
             return{
                 ...prevForm,
-                [e.target.name]: e.target.value
+                [name]: value
             }
         })
+    }
+
+    function handleFormSubmission(e){
+        e.preventDefault()
+        console.log(formData)
     }
     
     const modal = useRef()
@@ -30,7 +45,7 @@ function AddNewTaskModal(){
             <dialog ref={modal} className='dialog' aria-labelledby='modal_title3' id='dialog_addNewTask'> 
                 <h2 className='modal--title fs-1-2 fw--bold' id='modal_title3'>Add New Task</h2>
 
-                <form className='grid'>
+                <form className='grid' onSubmit={handleFormSubmission}>
 
                     <div className='grid--flow'>
                         <label className='fw--bold grayText--1'>Title</label>
