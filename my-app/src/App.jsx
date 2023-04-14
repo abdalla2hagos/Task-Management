@@ -8,53 +8,80 @@ import EditTaskModal from './components/EditTaskModal'
 import TaskModal from './components/TasksModal'
 import DeleteBoardModal from './components/DeleteBoardModal'
 import DeleteTaskModal from './components/DeleteTaskModal'
+import BoardTitle from './components/BoardTitle'
 
 
 function App() {
-  // const [formData, setFormData] = useState(form())
+  const [formData, setFormData] = useState(form())
+  const [boradForm, setBoardForm] = useState({
+    addBoardName: '',
+    addBoardColumns1: '',
+    addBoardColumns2: ''
+  })
+  const [boardTitle, setBoardTitle] = useState(['friut'])
 
-  // useEffect(()=>{
-  //     localStorage.setItem('item', JSON.stringify(formData))
-  // }, [formData])
+  useEffect(()=>{
+      localStorage.setItem('item', JSON.stringify(formData))
+  }, [formData])
 
-  // function form(){
-  //     const storedFormValues = localStorage.getItem('item')
-  //     if(!storedFormValues)return{
-  //         addTaskTitle: '',
-  //         addTaskDesc: '',
-  //         addSubtask1:'',
-  //         addSubtask2: '',
-  //         status: ''
-  //     }
-  //     return JSON.parse(storedFormValues)
-  // }
+  const title = boardTitle.map(title => <BoardTitle boardTitle={title}/>)
 
-  // function handleForm(e){
-  //     const {name, value} = e.target
-  //     setFormData(prevForm => {
-  //         return{
-  //             ...prevForm,
-  //             [name]: value
-  //         }
-  //     })
-  // }
+  function handleBoardChange(e){
+    const {name, value} = e.target
+    setBoardForm(prev => {
+        return{
+            ...prev,
+            [name]: value
+        }
+    })
+  }
 
-  // function handleFormSubmission(e){
-  //     e.preventDefault()
-  //     modal.current.close()
-  //     window.setTimeout(()=>{
-  //       localStorage.removeItem('item')
-  //     },1000)
-  // }
+  function handleBoardSubmit(e){
+    e.preventDefault()
+    boardTitle.push(boradForm.addBoardName)
+    setBoardTitle(prev => prev.map(title =>{
+        return [...title, boradForm.addBoardName]
+    }))
+  }
+console.log(boardTitle)
+  function form(){
+      const storedFormValues = localStorage.getItem('item')
+      if(!storedFormValues)return{
+          addTaskTitle: '',
+          addTaskDesc: '',
+          addSubtask1:'',
+          addSubtask2: '',
+          status: ''
+      }
+      return JSON.parse(storedFormValues)
+  }
 
-  // const modal = useRef()
-  //   function openModal(){
-  //       modal.current.showModal()
-  //   }
+  function handleForm(e){
+      const {name, value} = e.target
+      setFormData(prevForm => {
+          return{
+              ...prevForm,
+              [name]: value
+          }
+      })
+  }
+
+  function handleFormSubmission(e){
+      e.preventDefault()
+    //   modal.current.close()
+      window.setTimeout(()=>{
+        localStorage.removeItem('item')
+      },1000)
+  }
+
+  const boardModal = useRef()
+    function openModal(){
+        boardModal.current.showModal()
+    }
 
   return (
    <>
-    {/* <dialog ref={modal} className='dialog' aria-labelledby='modal_title3' id='dialog_addNewTask'> 
+    <dialog className='dialog' aria-labelledby='modal_title3' id='dialog_addNewTask'> 
       <h2 className='modal--title fs-1-2 fw--bold' id='modal_title3'>Add New Task</h2>
 
       <form className='grid' onSubmit={handleFormSubmission}>
@@ -103,7 +130,6 @@ function App() {
 
       <button className='dark--Button whiteText purpleBackground--1'>Create Task</button>
     </dialog>
-    <button onClick={openModal}>open modal</button> */}
 
     {/* <dialog ref={modal} className='dialog' aria-labelledby='modal_title4' id='dialog_editTask'> 
       <h2 className='modal--title fw--bold fs-1-2' id='modal_title4'>Edit Task</h2>
@@ -158,28 +184,28 @@ function App() {
     {/* <button onClick={openModal}>open modal</button> */}
 
 
-    {/* <dialog ref={modal} className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
+    <dialog ref={boardModal} className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
       <h2 className='modal--title fw--bold fs-1-2' id='modal_title1'>Add New Board</h2>
 
-      <form className='grid'>
+      <form className='grid' onSubmit={handleBoardSubmit}>
 
           <div className='grid--flow'>
               <label className='fw--bold grayText--1'>Board Name</label>
-              <input className='fs--0-875' type='text' name='addBoardName' placeholder='e.g. Web Design'/>
+              <input className='fs--0-875' type='text' name='addBoardName' placeholder='e.g. Web Design' value={boradForm.addBoardName} onChange={handleBoardChange}/>
           </div>
 
           <div>
               <label className='fw--bold grayText--1'>Board Columns</label>
 
               <div className='flex--flow'>
-                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns' placeholder='e.g. ToDo'/>
+                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns1' placeholder='e.g. ToDo' value={boradForm.addBoardColumns1} />
                   <button className='removeItemIcon'>
                       <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                   </button>
               </div>
 
               <div className='flex--flow'>
-                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns' placeholder='e.g. Doning'/>
+                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns2' placeholder='e.g. Doning' value={boradForm.addBoardColumns2}  onChange={handleBoardChange}/>
                   <button className='removeItemIcon'>
                       <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                   </button>
@@ -196,7 +222,6 @@ function App() {
       <button className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
         
     </dialog>
-    <button onClick={openModal}>open modal</button> */}
 
 
     {/* <dialog ref={modal} className='dialog' aria-labelledby='modal_title2' id='dialog_editBoard'> 
@@ -299,7 +324,7 @@ function App() {
     {/* <TaskModal /> */}
     <DeleteBoardModal />
     <DeleteTaskModal />
-    <Header />
+    <Header openModal={()=> openModal()} boardTitle={title}/>
     <Main />
    </>
   )

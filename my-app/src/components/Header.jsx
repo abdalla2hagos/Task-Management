@@ -1,8 +1,19 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
+import BoardTitle from './BoardTitle'
 
-function Header(){
+function Header(props){
     const [sidebarExpansion, setSidebarExpansion] = useState(false)
     const [ellipsisExpansion, setEllipsisExpansion] = useState(false)
+
+    useEffect(()=>{
+        // close sidebar and ellipsis when clicking away
+        document.addEventListener('click', e => {
+            if(!e.target.closest('.sidebar, .boardTitle, .ellipsis')) {
+                setSidebarExpansion(false)
+                setEllipsisExpansion(false)
+            }
+        })
+    }, [])
 
     const sidebar = {
         transform: sidebarExpansion ? 'translateX(0)' : 'translateX(-100%)',
@@ -21,15 +32,6 @@ function Header(){
         setEllipsisExpansion(pervExpansion => !pervExpansion)
     }
 
-    useEffect(()=>{
-        // close sidebar and ellipsis when clicking away
-        document.addEventListener('click', e => {
-            if(!e.target.closest('.sidebar, .boardTitle, .ellipsis')) {
-                setSidebarExpansion(false)
-                setEllipsisExpansion(false)
-            }
-        })
-    }, [])
 
     return(
         <>
@@ -86,19 +88,14 @@ function Header(){
                                 <li className='nav__item'>
                                     <a href="" className='nav__link nav__linkSelected grayText--1 fs--0-875'>
                                         <svg className='nav__icon' width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.889A2.889 2.889 0 0 1 2.889 0H13.11A2.889 2.889 0 0 1 16 2.889V13.11A2.888 2.888 0 0 1 13.111 16H2.89A2.889 2.889 0 0 1 0 13.111V2.89Zm1.333 5.555v4.667c0 .859.697 1.556 1.556 1.556h6.889V8.444H1.333Zm8.445-1.333V1.333h-6.89A1.556 1.556 0 0 0 1.334 2.89V7.11h8.445Zm4.889-1.333H11.11v4.444h3.556V5.778Zm0 5.778H11.11v3.11h2a1.556 1.556 0 0 0 1.556-1.555v-1.555Zm0-7.112V2.89a1.555 1.555 0 0 0-1.556-1.556h-2v3.111h3.556Z" fill="#828FA3"/></svg>
-                                        Platform Luanch
+                                        Platform Luanch Luanch
                                     </a>
                                 </li>
 
-                                <li className='nav__item'>
-                                    <a href="" className='nav__link grayText--1 fs--0-875'>
-                                        <svg className='nav__icon' width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.889A2.889 2.889 0 0 1 2.889 0H13.11A2.889 2.889 0 0 1 16 2.889V13.11A2.888 2.888 0 0 1 13.111 16H2.89A2.889 2.889 0 0 1 0 13.111V2.89Zm1.333 5.555v4.667c0 .859.697 1.556 1.556 1.556h6.889V8.444H1.333Zm8.445-1.333V1.333h-6.89A1.556 1.556 0 0 0 1.334 2.89V7.11h8.445Zm4.889-1.333H11.11v4.444h3.556V5.778Zm0 5.778H11.11v3.11h2a1.556 1.556 0 0 0 1.556-1.555v-1.555Zm0-7.112V2.89a1.555 1.555 0 0 0-1.556-1.556h-2v3.111h3.556Z" fill="#828FA3"/></svg>
-                                            spa Marketing Plan Lorem, ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima praesentium alias ut dolorum earum officia reprehenderit? Sit vitae consequatur alias.
-                                    </a>
-                                </li>
+                               {props.boardTitle}
 
                                 <li className='nav__item'>
-                                    <button className='nav__addBoard purpleText--1'>
+                                    <button onClick={props.openModal} className='nav__addBoard purpleText--1'>
                                         <svg className='nav__Boardicon' width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.889A2.889 2.889 0 0 1 2.889 0H13.11A2.889 2.889 0 0 1 16 2.889V13.11A2.888 2.888 0 0 1 13.111 16H2.89A2.889 2.889 0 0 1 0 13.111V2.89Zm1.333 5.555v4.667c0 .859.697 1.556 1.556 1.556h6.889V8.444H1.333Zm8.445-1.333V1.333h-6.89A1.556 1.556 0 0 0 1.334 2.89V7.11h8.445Zm4.889-1.333H11.11v4.444h3.556V5.778Zm0 5.778H11.11v3.11h2a1.556 1.556 0 0 0 1.556-1.555v-1.555Zm0-7.112V2.89a1.555 1.555 0 0 0-1.556-1.556h-2v3.111h3.556Z" fill="#828FA3"/></svg>
                                         <svg  className='Plus--icon' width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path fill="var(--clr-purple-1)" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
                                         Create New Board
