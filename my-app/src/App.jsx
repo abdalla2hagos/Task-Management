@@ -12,76 +12,80 @@ import BoardTitle from './components/BoardTitle'
 
 
 function App() {
-  const [formData, setFormData] = useState(form())
-  const [boradForm, setBoardForm] = useState({
+//   const [formData, setFormData] = useState(form())
+  const [addNewBoardForm, setAddNewBoardForm] = useState({
     addBoardName: '',
     addBoardColumns1: '',
     addBoardColumns2: ''
   })
-  const [boardTitle, setBoardTitle] = useState(['friut'])
 
-  useEffect(()=>{
-      localStorage.setItem('item', JSON.stringify(formData))
-  }, [formData])
-
-  const title = boardTitle.map(title => <BoardTitle boardTitle={title}/>)
+  const [array, setArray] = useState([])
 
   function handleBoardChange(e){
     const {name, value} = e.target
-    setBoardForm(prev => {
+    setAddNewBoardForm(prev => {
         return{
             ...prev,
             [name]: value
         }
     })
   }
-
+  
   function handleBoardSubmit(e){
-    e.preventDefault()
-    boardTitle.push(boradForm.addBoardName)
-    setBoardTitle(prev => prev.map(title =>{
-        return [...title, boradForm.addBoardName]
-    }))
-  }
-console.log(boardTitle)
-  function form(){
-      const storedFormValues = localStorage.getItem('item')
-      if(!storedFormValues)return{
-          addTaskTitle: '',
-          addTaskDesc: '',
-          addSubtask1:'',
-          addSubtask2: '',
-          status: ''
-      }
-      return JSON.parse(storedFormValues)
-  }
-
-  function handleForm(e){
-      const {name, value} = e.target
-      setFormData(prevForm => {
-          return{
-              ...prevForm,
-              [name]: value
-          }
-      })
-  }
-
-  function handleFormSubmission(e){
       e.preventDefault()
-    //   modal.current.close()
-      window.setTimeout(()=>{
-        localStorage.removeItem('item')
-      },1000)
+      const tt = Object.values(addNewBoardForm)
+    //   console.log(tt[0])
+      array.push(tt[0])
+      console.log(array)
   }
 
-  const boardModal = useRef()
+  const title = array.map(title => <BoardTitle title={title}/>)
+//   console.log(addNewBoardForm.addBoardName)
+
+//   useEffect(()=>{
+//       localStorage.setItem('item', JSON.stringify(formData))
+//   }, [formData])
+
+
+
+//   function form(){
+//       const storedFormValues = localStorage.getItem('item')
+//       if(!storedFormValues)return{
+//           addTaskTitle: '',
+//           addTaskDesc: '',
+//           addSubtask1:'',
+//           addSubtask2: '',
+//           status: ''
+//       }
+//       return JSON.parse(storedFormValues)
+//   }
+
+//   function handleForm(e){
+//       const {name, value} = e.target
+//       setFormData(prevForm => {
+//           return{
+//               ...prevForm,
+//               [name]: value
+//           }
+//       })
+//   }
+
+//   function handleFormSubmission(e){
+//       e.preventDefault()
+//     //   modal.current.close()
+//       window.setTimeout(()=>{
+//         localStorage.removeItem('item')
+//       },1000)
+//   }
+
+  const addNewBoardModal = useRef()
     function openModal(){
-        boardModal.current.showModal()
+        addNewBoardModal.current.showModal()
     }
 
   return (
    <>
-    <dialog className='dialog' aria-labelledby='modal_title3' id='dialog_addNewTask'> 
+    {/* <dialog className='dialog' aria-labelledby='modal_title3' id='dialog_addNewTask'> 
       <h2 className='modal--title fs-1-2 fw--bold' id='modal_title3'>Add New Task</h2>
 
       <form className='grid' onSubmit={handleFormSubmission}>
@@ -129,7 +133,7 @@ console.log(boardTitle)
       </form>
 
       <button className='dark--Button whiteText purpleBackground--1'>Create Task</button>
-    </dialog>
+    </dialog> */}
 
     {/* <dialog ref={modal} className='dialog' aria-labelledby='modal_title4' id='dialog_editTask'> 
       <h2 className='modal--title fw--bold fs-1-2' id='modal_title4'>Edit Task</h2>
@@ -184,28 +188,28 @@ console.log(boardTitle)
     {/* <button onClick={openModal}>open modal</button> */}
 
 
-    <dialog ref={boardModal} className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
+    <dialog ref={addNewBoardModal} className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
       <h2 className='modal--title fw--bold fs-1-2' id='modal_title1'>Add New Board</h2>
 
       <form className='grid' onSubmit={handleBoardSubmit}>
 
           <div className='grid--flow'>
               <label className='fw--bold grayText--1'>Board Name</label>
-              <input className='fs--0-875' type='text' name='addBoardName' placeholder='e.g. Web Design' value={boradForm.addBoardName} onChange={handleBoardChange}/>
+              <input className='fs--0-875' type='text' name='addBoardName' placeholder='e.g. Web Design' value={addNewBoardForm.addBoardName} onChange={handleBoardChange}/>
           </div>
 
           <div>
               <label className='fw--bold grayText--1'>Board Columns</label>
 
               <div className='flex--flow'>
-                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns1' placeholder='e.g. ToDo' value={boradForm.addBoardColumns1} />
+                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns1' placeholder='e.g. ToDo' value={addNewBoardForm.addBoardColumns1} onChange={handleBoardChange}/>
                   <button className='removeItemIcon'>
                       <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                   </button>
               </div>
 
               <div className='flex--flow'>
-                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns2' placeholder='e.g. Doning' value={boradForm.addBoardColumns2}  onChange={handleBoardChange}/>
+                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns2' placeholder='e.g. Doning' value={addNewBoardForm.addBoardColumns2}  onChange={handleBoardChange}/>
                   <button className='removeItemIcon'>
                       <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                   </button>
@@ -324,7 +328,7 @@ console.log(boardTitle)
     {/* <TaskModal /> */}
     <DeleteBoardModal />
     <DeleteTaskModal />
-    <Header openModal={()=> openModal()} boardTitle={title}/>
+    <Header openModal={()=> openModal()} title={title}/>
     <Main />
    </>
   )

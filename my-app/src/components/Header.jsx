@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import BoardTitle from './BoardTitle'
 
+// props recived from app.js
 function Header(props){
     const [sidebarExpansion, setSidebarExpansion] = useState(false)
     const [ellipsisExpansion, setEllipsisExpansion] = useState(false)
@@ -92,7 +93,7 @@ function Header(props){
                                     </a>
                                 </li>
 
-                               {props.boardTitle}
+                               {props.title}
 
                                 <li className='nav__item'>
                                     <button onClick={props.openModal} className='nav__addBoard purpleText--1'>
