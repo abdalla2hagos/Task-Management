@@ -2,15 +2,9 @@ import React, {useRef} from 'react'
 
 
 function AddNewBoardModal(){
-
-        const modal = useRef()
-    
-        function openModal(){
-            modal.current.showModal()
-        }
     return(
         <>
-            <dialog ref={modal} className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
+            <dialog className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
                 <h2 className='modal--title fw--bold fs-1-2' id='modal_title1'>Add New Board</h2>
 
                 <form className='grid'>
@@ -48,8 +42,6 @@ function AddNewBoardModal(){
                 <button className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
                 
             </dialog>
-
-            <button onClick={openModal}>open modal</button>
         </>
     )
 }
