@@ -9,37 +9,46 @@ import TaskModal from './components/TasksModal'
 import DeleteBoardModal from './components/DeleteBoardModal'
 import DeleteTaskModal from './components/DeleteTaskModal'
 import BoardTitle from './components/BoardTitle'
+import BoardColumn from './components/BoardColumn'
 
 
 function App() {
-//   const [formData, setFormData] = useState(form())
-  const [addNewBoardForm, setAddNewBoardForm] = useState({
+
+  const [addNewBoardForm, setAddNewBoardForm] = useState([{
     addBoardName: '',
     addBoardColumns1: '',
     addBoardColumns2: ''
-  })
+  }])
 
-  const [array, setArray] = useState([])
+//  add new board title 
+  const [addTitle, setAddTitle] = useState([])
+//   add new column
+  const [addColumn, setAddColumn] = useState([])
+  console.log(addColumn)
 
+  
   function handleBoardChange(e){
-    const {name, value} = e.target
-    setAddNewBoardForm(prev => {
-        return{
-            ...prev,
-            [name]: value
-        }
-    })
-  }
+      const {name, value} = e.target
+      setAddNewBoardForm(prev => {
+          return[{
+              ...prev,
+              [name]: value
+            }]
+        })
+    }
+    
+    function handleNewColumn(){
+      setAddColumn(prev => [...prev, <BoardColumn />])
+    }
   
   function handleBoardSubmit(e){
       e.preventDefault()
-      const tt = Object.values(addNewBoardForm)
-    //   console.log(tt[0])
-      array.push(tt[0])
-      console.log(array)
+      setAddTitle(prev => [...prev, addNewBoardForm[0].addBoardName])
   }
 
-  const title = array.map(title => <BoardTitle title={title}/>)
+  const title = addTitle.map(title => <BoardTitle title={title}/>)
+
+//   console.log(title)
 //   console.log(addNewBoardForm.addBoardName)
 
 //   useEffect(()=>{
@@ -212,22 +221,17 @@ function App() {
                   </button>
               </div>
 
-              <div className='flex--flow'>
-                  <input className='fs--0-875 text--input' type='text' name='addBoardColumns2' placeholder='e.g. Doning' value={addNewBoardForm.addBoardColumns2}  onChange={handleBoardChange}/>
-                  <button className='removeItemIcon'>
-                      <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
-                  </button>
-              </div>
+            {addColumn}
 
-              <button onClick={closeAddNewBoardModal} className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
+              <button onClick={handleNewColumn} type='button' className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
                   <svg className='Plus--icon purpleText--1' width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="var(--clr-purple-1)" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
                   Add New Column
               </button>
           </div>
 
+            <button onClick={closeAddNewBoardModal} className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
       </form>
 
-      <button className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
         
     </dialog>
 
