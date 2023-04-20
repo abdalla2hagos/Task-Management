@@ -334,8 +334,8 @@ function App() {
     {/* <AddNewTaskModal /> */}
     {/* <EditTaskModal /> */}
     {/* <TaskModal /> */}
-    <DeleteBoardModal />
-    <DeleteTaskModal />
+    {/* <DeleteBoardModal />
+    <DeleteTaskModal /> */}
     <Header openAddNewBoardModal={()=> openAddNewBoardModal()} title={title}/>
     <Main />
    </>
