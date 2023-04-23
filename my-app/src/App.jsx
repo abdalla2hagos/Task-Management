@@ -21,14 +21,36 @@ function App(){
     addBoardColumns2: ''
   }])
 
+  
+
 //  add new board title 
   const [addTitle, setAddTitle] = useState([])
 //   add new column
   const [addColumn, setAddColumn] = useState([])
 
-  const [values, setValues] = useState([{
+  const [column, setColumn] = useState([{
+    addBoardColumn: '',
     id: nanoid()
   }])
+  console.log(column)
+
+function handleNewColumn(e){
+    const {name, value} = e.target
+    setColumn(prev => {
+        return[{
+            ...prev,
+            [name]: value
+        }]
+    })
+}
+
+  function newColumn(){
+    setAddColumn(prev=> [...prev, <BoardColumn key={nanoid()} handleNewColumn={(e)=> handleNewColumn(e)} column={column.addBoardColumn} deleteBoard={()=> deleteColumn(nanoid())} />])
+  }
+
+  function deleteColumn(id){
+    setAddColumn(addColumn.filter(column => column.id !== id))
+  }
 
   
   function handleBoardChange(e){
@@ -40,14 +62,11 @@ function App(){
             }]
         })
     }
-    
-    function handleNewColumn(){
-        setAddColumn(prev => [...prev, <BoardColumn delete={()=> handleDeleteColumn()} key={nanoid()} />])
-    }
 
-    function handleDeleteColumn(){
-        setAddColumn(addColumn.filter((_, index)=> index === index))
-    }
+    
+    // function handleTest(){
+        
+    // }
   
   function handleBoardSubmit(e){
       e.preventDefault()
@@ -229,9 +248,9 @@ function App(){
                   </button>
               </div>
 
-            {addColumn}
+                {addColumn}
 
-              <button onClick={handleNewColumn} type='button' className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
+              <button onClick={newColumn} type='button' className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
                   <svg className='Plus--icon purpleText--1' width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="var(--clr-purple-1)" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
                   Add New Column
               </button>
