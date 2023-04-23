@@ -83,7 +83,7 @@ function Header(props){
                         </div>
                         
                         <nav className='nav' id='menu1'>
-                            <p className='nav__title fs--1 fw--medium' >ALL BOARDS ( 3 )</p>
+                            <p className='nav__title fs--1 fw--medium' >ALL BOARDS ( {props.addTitle.length} )</p>
 
                             <ul className='nav__menu grayText--1 fw--bold'>
                                 <li className='nav__item'>

@@ -10,9 +10,10 @@ import DeleteBoardModal from './components/DeleteBoardModal'
 import DeleteTaskModal from './components/DeleteTaskModal'
 import BoardTitle from './components/BoardTitle'
 import BoardColumn from './components/BoardColumn'
+import {nanoid} from 'nanoid'
 
 
-function App() {
+function App(){
 
   const [addNewBoardForm, setAddNewBoardForm] = useState([{
     addBoardName: '',
@@ -24,7 +25,10 @@ function App() {
   const [addTitle, setAddTitle] = useState([])
 //   add new column
   const [addColumn, setAddColumn] = useState([])
-  console.log(addColumn)
+
+  const [values, setValues] = useState([{
+    id: nanoid()
+  }])
 
   
   function handleBoardChange(e){
@@ -38,7 +42,11 @@ function App() {
     }
     
     function handleNewColumn(){
-      setAddColumn(prev => [...prev, <BoardColumn />])
+        setAddColumn(prev => [...prev, <BoardColumn delete={()=> handleDeleteColumn()} key={nanoid()} />])
+    }
+
+    function handleDeleteColumn(){
+        setAddColumn(addColumn.filter((_, index)=> index === index))
     }
   
   function handleBoardSubmit(e){
@@ -336,7 +344,7 @@ function App() {
     {/* <TaskModal /> */}
     {/* <DeleteBoardModal />
     <DeleteTaskModal /> */}
-    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} title={title}/>
+    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} title={title} addTitle={addTitle}/>
     <Main />
    </>
   )
