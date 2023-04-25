@@ -27,12 +27,11 @@ function App(){
   const [addTitle, setAddTitle] = useState([])
 //   add new column
   const [addColumn, setAddColumn] = useState([])
+  const [deleteClicked, setDeleteClicked] = useState(false)
 
   const [column, setColumn] = useState([{
-    addBoardColumn: '',
-    id: nanoid()
+    addBoardColumn: ''
   }])
-  console.log(column)
 
 function handleNewColumn(e){
     const {name, value} = e.target
@@ -45,12 +44,13 @@ function handleNewColumn(e){
 }
 
   function newColumn(){
-    setAddColumn(prev=> [...prev, <BoardColumn key={nanoid()} handleNewColumn={(e)=> handleNewColumn(e)} column={column.addBoardColumn} deleteBoard={()=> deleteColumn(nanoid())} />])
+    setAddColumn(prev=> [...prev, <BoardColumn key={nanoid()} deleteColumn={()=> deleteColumn()} handleNewColumn={(e)=> handleNewColumn(e)} column={column.addBoardColumn} deleteClicked={deleteClicked} />])
   }
 
-  function deleteColumn(id){
-    setAddColumn(addColumn.filter(column => column.id !== id))
+  function deleteColumn(){
+    setDeleteClicked(true)
   }
+
 
   
   function handleBoardChange(e){
@@ -63,10 +63,6 @@ function handleNewColumn(e){
         })
     }
 
-    
-    // function handleTest(){
-        
-    // }
   
   function handleBoardSubmit(e){
       e.preventDefault()
