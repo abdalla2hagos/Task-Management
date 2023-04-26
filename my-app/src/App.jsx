@@ -25,33 +25,25 @@ function App(){
 
 //  add new board title 
   const [addTitle, setAddTitle] = useState([])
-//   add new column
+
+
+//   onChange
+  const [boardColumn, setBoardColumn] = useState()
+
+//   pend to DOM
   const [addColumn, setAddColumn] = useState([])
-  const [deleteClicked, setDeleteClicked] = useState(false)
 
-  const [column, setColumn] = useState([{
-    addBoardColumn: ''
-  }])
-
-function handleNewColumn(e){
-    const {name, value} = e.target
-    setColumn(prev => {
-        return[{
-            ...prev,
-            [name]: value
-        }]
-    })
-}
-
-  function newColumn(){
-    setAddColumn(prev=> [...prev, <BoardColumn key={nanoid()} deleteColumn={()=> deleteColumn()} handleNewColumn={(e)=> handleNewColumn(e)} column={column.addBoardColumn} deleteClicked={deleteClicked} />])
+  function handleColumnChange(e){
+    setBoardColumn(e.target.value)
   }
 
-  function deleteColumn(){
-    setDeleteClicked(true)
-  }
+    function addNewColumn(){
+        setAddColumn([...addColumn, boardColumn])
+        console.log(addColumn)
+    }
 
-
+    const result = addColumn.map(id=> <BoardColumn boardColumn={boardColumn} handleColumnChange={(e)=> handleColumnChange(e)}/>)
+    
   
   function handleBoardChange(e){
       const {name, value} = e.target
@@ -244,9 +236,9 @@ function handleNewColumn(e){
                   </button>
               </div>
 
-                {addColumn}
+                {result}
 
-              <button onClick={newColumn} type='button' className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
+              <button onClick={addNewColumn} type='button' className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
                   <svg className='Plus--icon purpleText--1' width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="var(--clr-purple-1)" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
                   Add New Column
               </button>
