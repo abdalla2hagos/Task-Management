@@ -1,14 +1,15 @@
 import React, {useRef} from 'react'
 import Columns from './Columns'
 
-function Main(){
+// recieved from app
+function Main(props){
     return(
         <>
             <main className='main'>
                 <div className='wrapper '> 
                     <div className='flex--columns'>
-                        <Columns />
-                        <Columns />
+                        {/* <Columns /> */}
+                        {props.allColumn}
                    </div>
 
                     <div className='emptyBoard'>

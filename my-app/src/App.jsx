@@ -1,85 +1,63 @@
 import React, {useState, useRef, useEffect} from 'react'
 import Header from './components/Header'
 import Main from './components/Main'
-import EditBoardModal from './components/EditBoardModal'
-import AddNewBoardModal from './components/AddNewBoardModal'
-import AddNewTaskModal from './components/AddNewTaskModal'
-import EditTaskModal from './components/EditTaskModal'
-import TaskModal from './components/TasksModal'
-import DeleteBoardModal from './components/DeleteBoardModal'
-import DeleteTaskModal from './components/DeleteTaskModal'
 import BoardTitle from './components/BoardTitle'
 import BoardColumn from './components/BoardColumn'
+import Columns from './components/Columns'
 import {nanoid} from 'nanoid'
 
 
 function App(){
-
-  const [addNewBoardForm, setAddNewBoardForm] = useState([{
-    addBoardName: '',
-    addBoardColumns1: '',
-    addBoardColumns2: ''
-  }])
-
+//  handle board name onChange
+  const [boardName, setBoardName] = useState()
   
-
 //  add new board title 
   const [addTitle, setAddTitle] = useState([])
 
+  const title = addTitle.map(title => <BoardTitle title={title}/>)
+  
+  function handleBoarNamedChange(e){
+    setBoardName(e.target.value)
+  }
 
-//   onChange
-  const [boardColumn, setBoardColumn] = useState()
+  //  handle column input onChange
+  const [columnInput, setColumnInput] = useState()
 
-//   pend to DOM
+//   add column input
+  const [addColumnInput, setAddColumnInput] = useState([])
+
+//   add the column to main
   const [addColumn, setAddColumn] = useState([])
 
   function handleColumnChange(e){
-    setBoardColumn(e.target.value)
+    setColumnInput(e.target.value)
   }
 
-//   function generateNewColumn({
-
-//   })
-
-useEffect(()=>{
-    console.log(addColumn)
-}, [addColumn])
-
     function allNewColumn(){
-        setAddColumn([...addColumn, {
+        setAddColumnInput([...addColumnInput, {
             id: nanoid(),
             isRemoved: false
         }])
     }
 
-    function removeColumn(id){
-        setAddColumn(prev=> prev.map(column=> {
+    function removeColumnInput(id){
+        setAddColumnInput(prev=> prev.map(column=> {
             return column.id === id ?
                 {...column, isRemoved: !column.isRemoved} :
                 column
         }))
     }
-
-    const result = addColumn.map(column=> <BoardColumn removeColumn={()=> removeColumn(column.id)} isRemoved={column.isRemoved} handleColumnChange={(e)=> handleColumnChange(e)}/>)
-    
+    // iterate and add values to boardColumnInput
+    const allColumnInput = addColumnInput.map(column=> <BoardColumn removeColumnInput={()=> removeColumnInput(column.id)} isRemoved={column.isRemoved} handleColumnChange={(e)=> handleColumnChange(e)}/>)
+    // iterate and add column to main
+    const allColumn = addColumn.map(column=> <Columns column={column}/>)
   
-  function handleBoardChange(e){
-      const {name, value} = e.target
-      setAddNewBoardForm(prev => {
-          return[{
-              ...prev,
-              [name]: value
-            }]
-        })
-    }
-
-  
-  function handleBoardSubmit(e){
+    function handleBoardSubmit(e){
       e.preventDefault()
-      setAddTitle(prev => [...prev, addNewBoardForm[0].addBoardName])
+      setAddTitle(prev => [...prev, boardName])
+      setAddColumn(prev => [...prev, columnInput])
   }
 
-  const title = addTitle.map(title => <BoardTitle title={title}/>)
 
 //   console.log(title)
 //   console.log(addNewBoardForm.addBoardName)
@@ -241,20 +219,20 @@ useEffect(()=>{
 
           <div className='grid--flow'>
               <label className='fw--bold grayText--1'>Board Name</label>
-              <input className='fs--0-875' type='text' name='addBoardName' placeholder='e.g. Web Design' value={addNewBoardForm.addBoardName} onChange={handleBoardChange}/>
+              <input className='fs--0-875' type='text' name='boardName' placeholder='e.g. Web Design' value={boardName} onChange={handleBoarNamedChange}/>
           </div>
 
           <div>
               <label className='fw--bold grayText--1'>Board Columns</label>
 
-              <div className='flex--flow'>
+              {/* <div className='flex--flow'>
                   <input className='fs--0-875 text--input' type='text' name='addBoardColumns1' placeholder='e.g. ToDo' value={addNewBoardForm.addBoardColumns1} onChange={handleBoardChange}/>
                   <button className='removeItemIcon'>
                       <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fill-rule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"/><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"/></g></svg>
                   </button>
-              </div>
+              </div> */}
 
-                {result}
+                {allColumnInput}
 
               <button onClick={allNewColumn} type='button' className='light--Button purpleText--1 grayBackground--3 fw--bold addBtn'>
                   <svg className='Plus--icon purpleText--1' width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="var(--clr-purple-1)" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z"/></svg>
@@ -370,7 +348,7 @@ useEffect(()=>{
     {/* <DeleteBoardModal />
     <DeleteTaskModal /> */}
     <Header openAddNewBoardModal={()=> openAddNewBoardModal()} title={title} addTitle={addTitle}/>
-    <Main />
+    <Main allColumn={allColumn}/>
    </>
   )
 }
