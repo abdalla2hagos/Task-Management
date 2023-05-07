@@ -14,11 +14,11 @@ function App(){
 //  add new board title 
   const [addTitle, setAddTitle] = useState([])
 
-  const title = addTitle.map(title => <BoardTitle title={title}/>)
-  
   function handleBoarNamedChange(e){
-    setBoardName(e.target.value)
-  }
+      setBoardName(e.target.value)
+    }
+
+    const title = addTitle.map(title => <BoardTitle key={nanoid()} title={title}/>)
 
   //  handle column input onChange
   const [columnInput, setColumnInput] = useState()
@@ -26,13 +26,14 @@ function App(){
 //   add column input
   const [addColumnInput, setAddColumnInput] = useState([])
 
-//   add the column to main
+//   add the column value to main
   const [addColumn, setAddColumn] = useState([])
 
   function handleColumnChange(e){
     setColumnInput(e.target.value)
   }
 
+//   this fun can be used to prevent duplicate or undefiend
     function allNewColumn(){
         setAddColumnInput([...addColumnInput, {
             id: nanoid(),
@@ -41,22 +42,32 @@ function App(){
     }
 
     function removeColumnInput(id){
-        setAddColumnInput(prev=> prev.map(column=> {
-            return column.id === id ?
-                {...column, isRemoved: !column.isRemoved} :
-                column
-        }))
+        setAddColumnInput(prev=> prev.map(input=> {
+            return input.id === id ?
+                {...input, isRemoved: !input.isRemoved} :
+                input  
+            }).filter(input=> !input.isRemoved)
+        )
     }
+    
     // iterate and add values to boardColumnInput
-    const allColumnInput = addColumnInput.map(column=> <BoardColumn removeColumnInput={()=> removeColumnInput(column.id)} isRemoved={column.isRemoved} handleColumnChange={(e)=> handleColumnChange(e)}/>)
+    const allColumnInput = addColumnInput.map(input=> <BoardColumn key={nanoid()} removeColumnInput={()=> removeColumnInput(input.id)} isRemoved={input.isRemoved} handleColumnChange={(e)=> handleColumnChange(e)}/>)
     // iterate and add column to main
-    const allColumn = addColumn.map(column=> <Columns column={column}/>)
+    const allColumn = addColumn.map(column=> <Columns key={nanoid()} column={column}/>)
+
   
     function handleBoardSubmit(e){
       e.preventDefault()
+
+    //   if(!addTitle.length) return
       setAddTitle(prev => [...prev, boardName])
-      setAddColumn(prev => [...prev, columnInput])
+
+    //  if columnInput array is empty dont add empty boardColumn to main
+    if(!columnInput.length) return
+    setAddColumn(prev => [...prev, columnInput])
+        
   }
+  console.log(addColumn)
 
 
 //   console.log(title)
@@ -104,6 +115,8 @@ function App(){
     }
 
     function closeAddNewBoardModal(){
+        // if boardName input is empry dont close modal
+        // if(boardName.value === '') returns
         addNewBoardModal.current.close()
     }
 
@@ -219,7 +232,7 @@ function App(){
 
           <div className='grid--flow'>
               <label className='fw--bold grayText--1'>Board Name</label>
-              <input className='fs--0-875' type='text' name='boardName' placeholder='e.g. Web Design' value={boardName} onChange={handleBoarNamedChange}/>
+              <input  className='fs--0-875' type='text' name='boardName' placeholder='e.g. Web Design' value={boardName} onChange={handleBoarNamedChange}/>
           </div>
 
           <div>
