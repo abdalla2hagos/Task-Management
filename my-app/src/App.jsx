@@ -5,9 +5,12 @@ import BoardTitle from './components/BoardTitle'
 import BoardColumn from './components/BoardColumn'
 import Columns from './components/Columns'
 import {nanoid} from 'nanoid'
+import {useForm} from 'react-hook-form'
 
 
 function App(){
+    const {register, handleSubmit, formState: {errors}} = useForm()
+
 //  handle board name onChange
   const [boardName, setBoardName] = useState()
   
@@ -18,7 +21,7 @@ function App(){
       setBoardName(e.target.value)
     }
 
-    const title = addTitle.map(title => <BoardTitle key={nanoid()} title={title}/>)
+    const title = addTitle.map((title, index) => <BoardTitle key={index} title={title}/>)
 
   //  handle column input onChange
   const [columnInput, setColumnInput] = useState()
@@ -51,74 +54,37 @@ function App(){
     }
     
     // iterate and add values to boardColumnInput
-    const allColumnInput = addColumnInput.map(input=> <BoardColumn key={nanoid()} removeColumnInput={()=> removeColumnInput(input.id)} isRemoved={input.isRemoved} handleColumnChange={(e)=> handleColumnChange(e)}/>)
+    const allColumnInput = addColumnInput.map((input, index)=> <BoardColumn key={index} removeColumnInput={()=> removeColumnInput(input.id)} isRemoved={input.isRemoved} handleColumnChange={(e)=> handleColumnChange(e)}/>)
     // iterate and add column to main
-    const allColumn = addColumn.map(column=> <Columns key={nanoid()} column={column}/>)
+    const allColumn = addColumn.map((column, index)=> <Columns key={index} column={column}/>)
 
   
-    function handleBoardSubmit(e){
-      e.preventDefault()
-
-    //   if(!addTitle.length) return
-      setAddTitle(prev => [...prev, boardName])
-
-    //  if columnInput array is empty dont add empty boardColumn to main
-    if(!columnInput.length) return
-    setAddColumn(prev => [...prev, columnInput])
+    function handleBoardSubmit(data, e){
+        e.preventDefault()
         
-  }
-  console.log(addColumn)
+        addNewBoardModal.current.close()
+    
+        setAddTitle(prev => [...prev, boardName])
 
-
-//   console.log(title)
-//   console.log(addNewBoardForm.addBoardName)
-
-//   useEffect(()=>{
-//       localStorage.setItem('item', JSON.stringify(formData))
-//   }, [formData])
-
-
-
-//   function form(){
-//       const storedFormValues = localStorage.getItem('item')
-//       if(!storedFormValues)return{
-//           addTaskTitle: '',
-//           addTaskDesc: '',
-//           addSubtask1:'',
-//           addSubtask2: '',
-//           status: ''
-//       }
-//       return JSON.parse(storedFormValues)
-//   }
-
-//   function handleForm(e){
-//       const {name, value} = e.target
-//       setFormData(prevForm => {
-//           return{
-//               ...prevForm,
-//               [name]: value
-//           }
-//       })
-//   }
-
-//   function handleFormSubmission(e){
-//       e.preventDefault()
-//     //   modal.current.close()
-//       window.setTimeout(()=>{
-//         localStorage.removeItem('item')
-//       },1000)
-//   }
+        //  if columnInput array is empty dont add empty boardColumn to main
+        if(!columnInput.length) return
+        setAddColumn(prev => [...prev, columnInput]) 
+    }
 
     const addNewBoardModal = useRef()
     function openAddNewBoardModal(){
         addNewBoardModal.current.showModal()
     }
 
-    function closeAddNewBoardModal(){
-        // if boardName input is empry dont close modal
-        // if(boardName.value === '') returns
-        addNewBoardModal.current.close()
+    const deleteBoardModal = useRef()
+    function openDeleteBoardModal(){
+        deleteBoardModal.current.showModal()
     }
+
+    function handleBoardDelete(){
+        deleteBoardModal.current.close()
+    }
+
 
   return (
    <>
@@ -228,11 +194,12 @@ function App(){
     <dialog ref={addNewBoardModal} className='dialog' aria-labelledby='modal_title1' id='dialog1'> 
       <h2 className='modal--title fw--bold fs-1-2' id='modal_title1'>Add New Board</h2>
 
-      <form className='grid' onSubmit={handleBoardSubmit}>
+      <form className='grid' onSubmit={handleSubmit(handleBoardSubmit)}>
 
           <div className='grid--flow'>
               <label className='fw--bold grayText--1'>Board Name</label>
-              <input  className='fs--0-875' type='text' name='boardName' placeholder='e.g. Web Design' value={boardName} onChange={handleBoarNamedChange}/>
+              <input {...register('boardName', {required: 'this is required'})}  className='fs--0-875' type='text' name='boardName' placeholder='e.g. Web Design' value={boardName} onChange={handleBoarNamedChange}/>
+            <p>{errors.boardName?.message}</p>
           </div>
 
           <div>
@@ -253,7 +220,7 @@ function App(){
               </button>
           </div>
 
-            <button onClick={closeAddNewBoardModal} className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
+            <button className='dark--Button whiteText purpleBackground--1'>Create New Board</button>
       </form>
 
         
@@ -352,6 +319,19 @@ function App(){
     </dialog>
     <button onClick={openModal}>open modal</button> */}
 
+    <dialog ref={deleteBoardModal} className='dialog' aria-labelledby='modal_title15' id='dialog_deleteBoard'>
+        <h2 className='modal--title orangeText--1 fs-1-2 fw--bold' id='modal_title5'>Delete this board?</h2>
+
+        <p className='modal--text grayText--1'>Lorem, ipsum dolor sit amet consectetur 
+        adipisicing elit. Est suscipit reprehenderit amet eveniet hic at nulla incidunt debitis dolorem provident?
+        </p>
+
+        <div className='flex--delete fw--medium'>
+            <button onClick={handleBoardDelete} className='deleteBtn whiteText orangeBackground--1'>Delete</button>
+            <button className='cancelBtn purpleText--1'>Cancel</button>
+        </div>
+    </dialog>
+
 
     {/* <EditBoardModal /> */}
     {/* <AddNewBoardModal /> */}
@@ -360,7 +340,7 @@ function App(){
     {/* <TaskModal /> */}
     {/* <DeleteBoardModal />
     <DeleteTaskModal /> */}
-    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} title={title} addTitle={addTitle}/>
+    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} openDeleteBoardModal={()=> openDeleteBoardModal()} title={title} addTitle={addTitle}/>
     <Main allColumn={allColumn}/>
    </>
   )
