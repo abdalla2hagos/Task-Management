@@ -6,35 +6,49 @@ import BoardColumn from './components/BoardColumn'
 import Columns from './components/Columns'
 import {nanoid} from 'nanoid'
 import {useForm} from 'react-hook-form'
+import { boards } from './data/data'
 
 
 function App(){
     const {register, handleSubmit, formState: {errors}} = useForm()
-
+    
+    //  initial state
+    const [board, setBoard] = useState(boards)
+    console.log(board)
 //  handle board name onChange
-  const [boardName, setBoardName] = useState()
+    const [boardName, setBoardName] = useState()
   
-//  add new board title 
-  const [addTitle, setAddTitle] = useState([])
+    function handleBoarNamedChange(e){
+        setBoardName(e.target.value)
+        }
 
-  function handleBoarNamedChange(e){
-      setBoardName(e.target.value)
+    function selectBoardName(id){
+        // const boardItem = board.find((board, index) => id === index + 1)
+        setBoard(prev => prev.map((board, index) => {
+            return id === index + 1 ?
+                {...board, isActive: !board.isActive} :
+                board
+            }))
+            // setBoard(prev => prev.find((board, index) => id === index + 1).map(board => {
+            //     return {...board, isActive: !board.isActive}
+            // }) )
     }
+    
+    const title = board.map((board, index) => <BoardTitle key={index} title={board.name} selectBoardName={()=> selectBoardName(board.id)}/>)
+    
 
-    const title = addTitle.map((title, index) => <BoardTitle key={index} title={title}/>)
+    //  handle column input onChange
+    const [columnInput, setColumnInput] = useState()
 
-  //  handle column input onChange
-  const [columnInput, setColumnInput] = useState()
+    //   add column input
+    const [addColumnInput, setAddColumnInput] = useState([])
 
-//   add column input
-  const [addColumnInput, setAddColumnInput] = useState([])
+    //   add the column value to main
+    const [addColumn, setAddColumn] = useState([])
 
-//   add the column value to main
-  const [addColumn, setAddColumn] = useState([])
-
-  function handleColumnChange(e){
-    setColumnInput(e.target.value)
-  }
+    function handleColumnChange(e){
+        setColumnInput(e.target.value)
+    }
 
 //   this fun can be used to prevent duplicate or undefiend
     function allNewColumn(){
@@ -64,8 +78,14 @@ function App(){
         
         addNewBoardModal.current.close()
     
-        setAddTitle(prev => [...prev, boardName])
-
+        setBoard(prev => [...prev, {
+            id: board.length + 1,
+            name:boardName,
+            isActive: false,
+            columns: []
+        }])
+        // reset boardName input
+        setBoardName('')
         //  if columnInput array is empty dont add empty boardColumn to main
         if(!columnInput.length) return
         setAddColumn(prev => [...prev, columnInput]) 
@@ -340,7 +360,7 @@ function App(){
     {/* <TaskModal /> */}
     {/* <DeleteBoardModal />
     <DeleteTaskModal /> */}
-    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} openDeleteBoardModal={()=> openDeleteBoardModal()} title={title} addTitle={addTitle}/>
+    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} openDeleteBoardModal={()=> openDeleteBoardModal()} title={title}/>
     <Main allColumn={allColumn}/>
    </>
   )
