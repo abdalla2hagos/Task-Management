@@ -23,18 +23,17 @@ function App(){
         }
 
     function selectBoardName(id){
-        // const boardItem = board.find((board, index) => id === index + 1)
         setBoard(prev => prev.map((board, index) => {
             return id === index + 1 ?
-                {...board, isActive: !board.isActive} :
-                board
+                {...board, isActive: board.isActive = true} :
+                {...board, isActive: board.isActive = false}
             }))
-            // setBoard(prev => prev.find((board, index) => id === index + 1).map(board => {
-            //     return {...board, isActive: !board.isActive}
-            // }) )
     }
     
-    const title = board.map((board, index) => <BoardTitle key={index} title={board.name} selectBoardName={()=> selectBoardName(board.id)}/>)
+    function active() {
+    }
+    const title = board.map((board, index) => <BoardTitle key={board.id} name={board.name} selectBoardName={()=> selectBoardName(board.id)} isActive={board.isActive}/>)
+    
     
 
     //  handle column input onChange
@@ -360,7 +359,7 @@ function App(){
     {/* <TaskModal /> */}
     {/* <DeleteBoardModal />
     <DeleteTaskModal /> */}
-    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} openDeleteBoardModal={()=> openDeleteBoardModal()} title={title}/>
+    <Header openAddNewBoardModal={()=> openAddNewBoardModal()} openDeleteBoardModal={()=> openDeleteBoardModal()} title={title} boardLength={board.length}/>
     <Main allColumn={allColumn}/>
    </>
   )

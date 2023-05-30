@@ -2,7 +2,7 @@ export const boards = [
       {
         id: 1,
         name: "Platform Launch",
-        isActive: false,
+        isActive: true,
         columns: [
           {
             name: "Todo",
